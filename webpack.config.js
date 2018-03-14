@@ -12,8 +12,8 @@ let config = {
 	entry: {
 		index: 'jsPath/index.js',
 		vendor: [
-			'axios',
-			'jquery',
+			// 'axios',
+			// 'jquery',
 			// 'lodash',
 			// 'velocity-animate',
 			// 'vee-validate',
@@ -141,10 +141,10 @@ let config = {
 		}),
 		// 定义全局引用
 		new webpack.ProvidePlugin({
-			$: 'jquery',
-			jQuery: 'jquery',
-			'window.jQuery': 'jquery',
-			'window.$': 'jquery',
+			// $: 'jquery',
+			// jQuery: 'jquery',
+			// 'window.jQuery': 'jquery',
+			// 'window.$': 'jquery',
 
 			// _: 'lodash',
 			// 'window._': 'lodash',
@@ -152,8 +152,8 @@ let config = {
 			// Velocity: 'velocity-animate',
 			// 'window.Velocity': 'velocity-animate',
 
-			axios: 'axios',
-			'window.axios': 'axios',
+			// axios: 'axios',
+			// 'window.axios': 'axios',
 
 			Vue: 'vue',
 			'window.Vue': 'vue',

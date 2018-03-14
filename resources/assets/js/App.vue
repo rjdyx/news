@@ -1,0 +1,19 @@
+<template>
+
+  <div id="app">
+  	neiwfhiuew
+    <router-view></router-view>
+  </div>
+
+</template>
+
+<script>
+
+</script>
+
+<style>
+  #app {
+    height: 100%;
+  }
+</style>
+
