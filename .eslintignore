@@ -1,0 +1,3 @@
+#忽略plugin文件下全部文件
+/resources/assets/js/plugin/*
+
