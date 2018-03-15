@@ -14,14 +14,10 @@
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/test', function () {
-    return view('test');
-});
-
-
 Route::get('/app', function () {
     return view('app');
 });
+
 
 Route::get('/index', 'HomeController@indexMsg');
 

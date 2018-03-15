@@ -1,14 +1,15 @@
 <template>
 
   <div id="app">
-  	neiwfhiuew
     <router-view></router-view>
   </div>
 
 </template>
 
 <script>
-
+export default{
+	name: 'App'
+}
 </script>
 
 <style>
@@ -16,4 +17,3 @@
     height: 100%;
   }
 </style>
-

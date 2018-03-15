@@ -4,12 +4,14 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
-// require('./bootstrap');
+require('./bootstrap')
+require('./config/init')
+import router from './router/app.js'
 import App from './App.vue'
+import Router from 'vue-router'
 
 window.Vue = require('vue')
-
+Vue.use(Router)
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -19,5 +21,6 @@ window.Vue = require('vue')
 Vue.component('example-component', require('./components/ExampleComponent.vue'))
 
 const app = new Vue({
-	render: h => h(APP)
+	router,
+	render: h => h(App)
 }).$mount('#app')

@@ -121,7 +121,8 @@ let config = {
 			'jsPath': path.resolve(__dirname, './resources/assets/js'),
 			'lang': path.resolve(__dirname, './resources/lang'),
 			'components': path.resolve(__dirname, './resources/assets/js/components'),
-			'utils': path.resolve(__dirname, './resources/assets/js/utils')
+			'utils': path.resolve(__dirname, './resources/assets/js/utils'),
+			'pages': path.resolve(__dirname, './resources/assets/js/pages')
 		}
 	},
 	// 用来配置 loader 模块的解析
