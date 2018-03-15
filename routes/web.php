@@ -18,6 +18,10 @@ Route::get('/test', function () {
     return view('test');
 });
 
+Route::get('/axios', function () {
+    return view('axios');
+});
+
 
 Route::get('/app', function () {
     return view('app');
@@ -29,24 +33,13 @@ Route::get('system/query', 'Admin\SystemController@query');
 
 Route::get('ws/checkConnect', 'Admin\SocketController@checkConnect');
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'active']], function () {
-
-    // websocket
-    Route::get('ws/qrCode/{id}', 'SocketController@qrCode');
-    Route::get('ws/getUser', 'SocketController@getUser');
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'/*, 'middleware' => ['auth', 'active']*/], function () {
     
-    // 分类
-    Route::group(['middleware' => ['role:classification_manage|admin']], function() {
-        Route::get('classification/query', 'ClassificationController@query');
-        Route::get('classification/queryWithPid', 'ClassificationController@queryWithPid');
-        Route::get('classification/queryAllWithPid', 'ClassificationController@queryAllWithPid');
-        Route::get('classification/queryAllParent', 'ClassificationController@queryAllParent');
-        Route::get('classification/queryAllChildren', 'ClassificationController@queryAllChildren');
-        Route::get('classification/queryAllParentWithChildren', 'ClassificationController@queryAllParentWithChildren');
-        Route::post('classification/checkClassification', 'ClassificationController@checkClassification');
-        Route::delete('classification/batchDestroy', 'ClassificationController@batchDestroy');
-        Route::resource('classification', 'ClassificationController');
-    });
+    // 导航栏管理
+    Route::post('nav/triggle/{id}', 'NavController@triggle');
+    Route::post('nav/changeSequence', 'NavController@changeSequence');
+    Route::put('nav/storeSubNav/{id}', 'NavController@storeSubNav');
+    Route::resource('nav', 'NavController');
 
     // 区域
     Route::group(['middleware' => ['role:area_manage|admin']], function() {
@@ -120,7 +113,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
         Route::resource('user', 'UserController');
 
         Route::post('system/upload', 'SystemController@upload');
-        Route::post('system/save', 'SystemController@save');
+        Route::post('system/s ave', 'SystemController@save');
     });
 });
 

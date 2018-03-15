@@ -17,9 +17,8 @@ class CreateLabNavsTable extends Migration
             $table->increments('id');
             $table->string('name', 20)->comment('导航栏项目的名字');
             $table->integer('pid')->default(0)->comment('父栏目，0表示这个栏目是主栏目');
-            $table->integer('priority')->default(1)->comment('栏目的顺序');
             $table->integer('model')->default(0)->comment('0--用列表显示，1--直接显示文章内容');
-            $table->integer('sequence')->default(0);
+            $table->integer('sequence')->default(0)->comment('栏目的顺序');
             $table->timestamps();
         });
     }
