@@ -12,4 +12,6 @@ class LabBottomMessage extends Model
      * @var string
      */
     protected $table = 'lab_bottom_messages';
+    
+    public $timestamps = false;
 }

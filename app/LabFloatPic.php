@@ -12,4 +12,6 @@ class LabFloatPic extends Model
      * @var string
      */
     protected $table = 'lab_float_pics';
+
+    public $timestamps = false;
 }

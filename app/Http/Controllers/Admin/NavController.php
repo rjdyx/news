@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class NavController extends Controller
 {
     /**
-     * 后台首页获取导航栏
+     * 后台获取主导航栏和子导航栏
      *
      * @return \Illuminate\Http\Response
      */

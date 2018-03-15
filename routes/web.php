@@ -41,6 +41,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'/*, 'middleware' => ['a
     Route::put('nav/storeSubNav/{id}', 'NavController@storeSubNav');
     Route::resource('nav', 'NavController');
 
+    // 链接管理
+    Route::get('link/indexMain', 'LinkController@indexMain');
+    Route::resource('link', 'LinkController');
+
+    // 底部版权信息
+    Route::resource('bottom-message', 'BottomMessageController');
+
     // 区域
     Route::group(['middleware' => ['role:area_manage|admin']], function() {
         Route::get('area/query', 'AreaController@query');

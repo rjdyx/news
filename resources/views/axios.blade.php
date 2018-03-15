@@ -71,7 +71,90 @@
 			// 	})
 		
 			// 改变导航栏顺序
-			axios.post('/admin/nav/changeSequence', {sequence: [5, 12, 2, 11, 9]})
+			// axios.post('/admin/nav/changeSequence', {sequence: [5, 12, 2, 11, 9]})
+			// 	.then(function (response) {
+			// 		console.log(response.data);
+			// 	})
+		
+			// 后台获取所有链接
+			// axios.get('/admin/link')
+			// 	.then(function (response) {
+			// 		console.log(response.data);
+			// 	})
+
+			// 后台获取主链接
+			// axios.get('/admin/link/indexMain')
+			// 	.then(function (response) {
+			// 		console.log(response.data);
+			// 	})
+		
+			// 新增链接分类
+			// var link = {
+			// 	name: 'main'
+			// }
+
+			// axios.post('/admin/link', link)
+			// 	.then(function (response) {
+			// 		console.log(response.data);
+			// 	})
+
+			//新增子链接
+			// var link = {
+			// 	name: 'sub-2',
+			// 	link: 'http://www/baidu.com',
+			// 	pid: 36
+			// }
+
+			// axios.post('/admin/link', link)
+			// 	.then(function (response) {
+			// 		console.log(response.data);
+			// 	})
+		
+			// 编辑链接分类
+			// var link = {
+			// 	name: 'main-change'
+			// }
+
+			// axios.put('/admin/link/36', link)
+			// 	.then(function (response) {
+			// 		console.log(response.data);
+			// 	})
+
+			//编辑子链接
+			// var link = {
+			// 	name: 'sub-change',
+			// 	link: 'http://www/baidu.com/123',
+			// 	pid: 36
+			// }
+
+			// axios.put('/admin/link/37', link)
+			// 	.then(function (response) {
+			// 		console.log(response.data);
+			// 	})
+				
+			// 删除分类或子链接
+			// axios.delete('/admin/link/36')
+			// 	.then(function (response) {
+			// 		console.log(response.data);
+			// 	})
+		
+			// 后台获取底部信息
+			// axios.get('/admin/bottom-message')
+			// 	.then(function (response) {
+			// 		console.log(response.data);
+			// 	})
+
+			// 修改底部信息
+			var message = {
+				address: "广州市天河区五山路483号华南农业大学行政楼902 1",
+				copyright: "Copyright © 华南农业大学重点实验室建设办公室 2",
+				email: "123sysjs@scau.edu.cn",
+				fax: "020-85285000",
+				phone: "020-85285000",
+				postcode: "510600"
+			}
+
+			axios.post('/admin/bottom-message', message)
 				.then(function (response) {
 					console.log(response.data);
 				})
