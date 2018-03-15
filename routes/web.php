@@ -14,9 +14,6 @@
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/test', function () {
-    return view('test');
-});
 
 Route::get('/axios', function () {
     return view('axios');
@@ -26,6 +23,7 @@ Route::get('/axios', function () {
 Route::get('/app', function () {
     return view('app');
 });
+
 
 Route::get('/index', 'HomeController@indexMsg');
 
