@@ -48,6 +48,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'/*, 'middleware' => ['a
     // 底部版权信息
     Route::resource('bottom-message', 'BottomMessageController');
 
+    // 浮动图片管理
+    Route::resource('float-pic', 'FloatPicController');
+
     // 区域
     Route::group(['middleware' => ['role:area_manage|admin']], function() {
         Route::get('area/query', 'AreaController@query');

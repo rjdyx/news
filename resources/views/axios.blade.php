@@ -145,16 +145,35 @@
 			// 	})
 
 			// 修改底部信息
-			var message = {
-				address: "广州市天河区五山路483号华南农业大学行政楼902 1",
-				copyright: "Copyright © 华南农业大学重点实验室建设办公室 2",
-				email: "123sysjs@scau.edu.cn",
-				fax: "020-85285000",
-				phone: "020-85285000",
-				postcode: "510600"
+			// var message = {
+			// 	address: "广州市天河区五山路483号华南农业大学行政楼902 1",
+			// 	copyright: "Copyright © 华南农业大学重点实验室建设办公室 2",
+			// 	email: "123sysjs@scau.edu.cn",
+			// 	fax: "020-85285000",
+			// 	phone: "020-85285000",
+			// 	postcode: "510600"
+			// }
+
+			// axios.post('/admin/bottom-message', message)
+			// 	.then(function (response) {
+			// 		console.log(response.data);
+			// 	})
+			
+			// 获取浮动图片管理信息
+			 // axios.get('/admin/float-pic')
+				// .then(function (response) {
+				// 	console.log(response.data);
+				// })
+
+			// 修改底部信息
+			var floatPic = {
+				flag: 0,
+				news_id: 1,
+				pic: '123',
+				title: '123'
 			}
 
-			axios.post('/admin/bottom-message', message)
+			axios.post('/admin/float-pic', floatPic)
 				.then(function (response) {
 					console.log(response.data);
 				})

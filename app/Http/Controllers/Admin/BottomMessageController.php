@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class BottomMessageController extends Controller
 {
     /**
-     * 后台后去底部信息
+     * 后台获取底部信息
      *
      * @return \Illuminate\Http\Response
      */
