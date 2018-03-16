@@ -8,7 +8,7 @@
 <template>
 
   <div class="form-wrap">
-	<title-common :title="title"></title-common>
+	<title-common v-if="isNeedTitle" :title="title"></title-common>
 
 	<el-form :model="formInline">
 		<template v-for="(newItem, index) in newData">
@@ -55,7 +55,14 @@ import TitleCommon from 'components/common/title.vue'
 export default{
 	name: 'basic',
 	props: {
-		newData: []
+		isNeedTitle: {
+			type: Boolean,
+			default: true
+		},
+		newData: {
+			type: Array,
+			default: []
+		},
 	},
 	data () {
 		return {

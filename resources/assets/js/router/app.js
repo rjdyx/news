@@ -27,7 +27,7 @@ const routes = [
 					},
 					{
 						path: 'editColumn',
-						component: addColumn
+						component: editColumn
 					}
 				]
 			}

@@ -11,6 +11,7 @@ import 'quill/dist/quill.bubble.css'
 Vue.use(iView)
 Vue.use(VueQuillEditor)
 
+require('sass/app.scss')
 // 注册element-ui全局组件
 import enLocale from 'element-ui/lib/locale/lang/en'
 import zhLocale from 'element-ui/lib/locale/lang/zh-CH'
