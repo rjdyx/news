@@ -35,6 +35,36 @@ class NavController extends Controller
         return response()->json($navsList);
     }
 
+    /**
+     * 后台获取主导航栏
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexNav()
+    {
+        $navs = LabNav::where('pid', 0)
+                    ->where('name', '<>', '主页')
+                    ->where('name', '<>', '下载中心')
+                    ->orderBy('sequence')
+                    ->get();
+
+        return response()->json($navs);
+    }
+
+    /**
+     * 后台根据父id获取子导航栏
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexSubNav($id)
+    {
+        $subNavs = LabNav::where('pid', $id)
+                    ->orderBy('created_at')
+                    ->get();
+
+        return response()->json($subNavs);
+    }
+
 
     /**
      * 新增主栏目+子栏目
