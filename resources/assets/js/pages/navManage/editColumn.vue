@@ -16,11 +16,7 @@
 		:title="dialogSetting.formTitle" 
 		:visible.sync="dialogSetting.dialogFormVisible"
 		:close-on-click-modal="dialogSetting.closeModel">
-			<ColumnForm :newData="formSetting.formData" :isNeedTitle="formSetting.isNeedTitle"></ColumnForm>
-			<div slot="footer" class="dialog-footer">
-			  	<el-button @click="cancel">取 消</el-button>
-			  	<el-button type="primary" @click="confirm">确 定</el-button>
-			</div>
+			<ColumnForm :newData="formSetting.formData" :isNeedTitle="formSetting.isNeedTitle" v-on:cancel="cancel" v-on:submit="submit"></ColumnForm>
 		</el-dialog>
 	</div>
 </template>
@@ -45,13 +41,15 @@ export default{
 				isNeedTitle: false,
 				formData: [
 					{
+						name: 'column',
 						type: 'text',
 						label: '主栏目',
 						placeholder: '长度：1~20',
 						// options:
 					},
 					{
-						type: 'text',
+						name: 'subColumn',
+						type: 'textAndBtn',
 						label: '子栏目',
 						placeholder: '长度：1~20'
 					}
@@ -70,7 +68,7 @@ export default{
 		cancel () {
 			this.$set(this.dialogSetting, 'dialogFormVisible', false)
 		},
-		confirm () {
+		submit () {
 			this.$set(this.dialogSetting, 'dialogFormVisible', false)
 		}
 	}
