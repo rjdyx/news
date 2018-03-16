@@ -20,6 +20,14 @@ class CreateLabNewsTable extends Migration
             $table->increments('id');
             $table->string('title', 255)->comment('题目');
             $table->longText('content')->comment('内容');
+            /**
+             * pid与priority联合
+             * -1与-1：默认消息
+             * -2与-2：最新消息
+             * -3与-3：通知公告
+             * -5与-5：常用管理系统
+             * -2与-4：滚动图片
+             */
             $table->integer('priority')->default(1)->comment('0-普通消息，1-公告');
             $table->integer('pid')->default(0);
             $table->timestamps();
