@@ -34,6 +34,8 @@ Route::get('ws/checkConnect', 'Admin\SocketController@checkConnect');
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'/*, 'middleware' => ['auth', 'active']*/], function () {
     
     // 导航栏管理
+    Route::get('nav/indexNav', 'NavController@indexNav');
+    Route::get('nav/indexSubNav/{id}', 'NavController@indexSubNav');
     Route::post('nav/triggle/{id}', 'NavController@triggle');
     Route::post('nav/changeSequence', 'NavController@changeSequence');
     Route::put('nav/storeSubNav/{id}', 'NavController@storeSubNav');
@@ -48,6 +50,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'/*, 'middleware' => ['a
 
     // 浮动图片管理
     Route::resource('float-pic', 'FloatPicController');
+
+    // 新闻管理
+    Route::get('news/getNewsList', 'NewsController@getNewsList');
+    Route::get('news/getNewsById/{id}', 'NewsController@getNewsById');
+    Route::resource('news', 'NewsController');
+
+    // 图片新闻管理
+    Route::get('carousel-pic/getCarouselPicByNewsId/{id}', 'NewsController@getCarouselPicByNewsId');
+    Route::resource('carousel-pic', 'CarouselPicController');
+    
 
     // 区域
     Route::group(['middleware' => ['role:area_manage|admin']], function() {

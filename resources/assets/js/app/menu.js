@@ -53,11 +53,11 @@ export default [
 		name: '导航栏管理',
 		children: [
 			{
-				path: '/test',
+				path: '/addColumn',
 				name: '新增栏目'
 			},
 			{
-				path: '/test',
+				path: '/editColumn',
 				name: '修改栏目'
 			}
 		]
