@@ -1,6 +1,6 @@
 
 import iView from 'iview'
-import 'iview/dist/styles/iview.css'
+// import 'iview/dist/styles/iview.css'
 
 import VueQuillEditor from 'vue-quill-editor'
 // require styles
@@ -14,7 +14,7 @@ Vue.use(VueQuillEditor)
 require('sass/app.scss')
 // 注册element-ui全局组件
 import enLocale from 'element-ui/lib/locale/lang/en'
-import zhLocale from 'element-ui/lib/locale/lang/zh-CH'
+import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
 import locale from 'element-ui/lib/locale'
 import 'element-ui/lib/theme-chalk/index.css'
 // 设置语言

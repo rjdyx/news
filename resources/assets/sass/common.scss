@@ -1,5 +1,67 @@
+<<<<<<< HEAD
 a{
 	text-decoration: none;
+=======
+.w100 {
+  width: 100%!important;
+}
+.h100 {
+  height: 100%;
+}
+.hauto {
+  height: auto!important;
+}
+.mhauto {
+  min-height: auto!important;
+}
+
+.pull-left {
+  float: left;
+}
+.pull-right {
+  float: right;
+}
+
+.txt-l {
+  text-align: left;
+}
+.txt-c {
+  text-align: center;
+}
+.txt-r {
+  text-align: right;
+}
+
+.vam {
+  vertical-align: middle;
+}
+
+.ovh {
+  overflow: hidden;
+}
+
+.ofya {
+  overflow-y: auto;
+}
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.none {
+  display: none;
+}
+
+.relative {
+  position: relative;
+}
+
+.white {
+  color: #fff;
 }
 
 .ml10{
