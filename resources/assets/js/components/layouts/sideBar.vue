@@ -6,21 +6,21 @@
  * 
  */
 <template>
-    <div class="sidebar-wrap">
-		<el-menu
-			:collapse="Collapse"
-			class="sidebar"
-			background-color="#545c64"
-      		text-color="#fff"
-      		active-text-color="#ffd04b">
-      		<div class="sidebar-logo">
-	    		HOME
-	    	</div>
+	<el-menu
+		:collapse="isCollapse"
+		class="sidebar"
+		background-color="#2c2e2f"
+		text-color="#fff"
+		active-text-color="#ffd04b">
+			<div class="sidebar-logo">
+				HOME
+			</div>
 			<template v-for="(menu, index) in menus">
 				<el-submenu
 					v-if="menu.children"
 					:index="menu.name"
-					:key="index">
+					:key="index"
+					:router="$route.path">
 					<template slot="title">
 					 	{{menu.name}}
 					</template>
@@ -47,16 +47,11 @@
 				</el-menu-item>
 			</template>
     </el-menu>
-    </div>
 </template>
 
 <script>
 export default {
 	name: 'SideBar',
-	data () {
-		return {
-		}
-	},
 	props: {
 		menus: {
 			type: Array,
@@ -64,25 +59,25 @@ export default {
 				return []
 			}
 		},
-		Collapse: false
+		Collapse: Boolean,
 	},
-	mounted () {
-	}
+	data () {
+		return {
+			isCollapse: false
+		}
+	},
+	watch: {
+		Collapse (nv) {
+			this.isCollapse = nv
+			console.log(nv)
+		}
+	},
 }
 </script>
  
-<style lang="sass">
+<style lang="sass" scoped>
 	.sidebar{
-		width: 100%;
 		height: 100%;
-		&-wrap{
-			position: fixed;
-			left: 0;
-			top: 0;
-			width: 309px;
-			height: 1000px;
-			margin-right: 309px;
-		}
 		&-logo{
 			width: 100%;
 			height: 89px;

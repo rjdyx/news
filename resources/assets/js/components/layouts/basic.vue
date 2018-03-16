@@ -20,12 +20,8 @@ export default{
 </script>
 
 <style>
-  #basic{
-	position: absolute;
-	left: 309px;
-	top: 76px;
-	background: #eee;
-	margin: 20px 0 0 20px;
-  }
+	#basic{
+		background: #eee;
+	}
 </style>
 

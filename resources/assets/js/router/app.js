@@ -10,7 +10,7 @@ import editColumn from '../pages/navManage/editColumn.vue'
 
 const routes = [
 	{
-		path: '/index',
+		path: '/',
 		component: index,
 		children: [
 			{

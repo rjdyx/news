@@ -12,7 +12,11 @@
         @else
             <link rel="stylesheet" href="{{ elixir('build/css/index.css') }}">
         @endif
-		
+		<script>
+            window.Laravel = <?php echo json_encode([
+                'csrfToken' => csrf_token(),
+            ]); ?>;
+        </script>
     </head>
     <body>
         <div id="app">
