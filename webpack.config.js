@@ -104,6 +104,13 @@ let config = {
 				query: {
 					name: '[name].[ext]?[hash]'
 				}
+			},
+			{
+				test: /\.(woff2?|eot|ttf|otf)(\?\S*)?$/,
+				loader: 'url-loader',
+				options: {
+					limit: 80000,
+				}
 			}
 		]
 	},

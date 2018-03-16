@@ -5,6 +5,8 @@ Vue.use(Router)
 import index from '../app/index.vue'
 import basic from 'components/layouts/basic.vue'
 import publishNews from 'pages/publish-news.vue'
+import indexNews from 'pages/index-news.vue'
+import basicContent from 'components/layouts/basic-content.vue'
 
 const routes = [
 	{
@@ -21,7 +23,7 @@ const routes = [
 					},
 					{
 						path: 'indexNews',
-						component: publishNews
+						component: indexNews
 					}
 				]
 			}

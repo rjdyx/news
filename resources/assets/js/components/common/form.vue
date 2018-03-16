@@ -8,27 +8,31 @@
 <template>
 
   <div class="form-wrap">
-	<title-common :title="title"></title-common>
+  	
+	<title-common :title="settitle"></title-common>
 		
 		<el-form 
-		:model="formInline" 
-		:class="formCss"
-		label-width="80px">
+			:model="form" 
+			:class="formCss"
+			label-width="80px">
+
 		<template v-for="(newItem, index) in newData">
+			<!-- 文本 -->
 			<el-form-item
 				v-if="newItem.type === 'text'"
 				:label="newItem.label">
 				<el-input 
-					v-model="formInline.user"
+					v-model="form.title"
 					:placeholder="newItem.placeholder"></el-input>
 			</el-form-item>
-
+			
+			<!-- 下拉选择 -->
 			<el-form-item 
 				v-else-if="newItem.type === 'selete' && newItem.components"
 				:label="newItem.label">
 				<template v-for="(lotsItem, lotsIndex) in newItem.components">
 					<el-select 
-						v-model="formInline.region" 
+						v-model="form.select" 
 						:placeholder="lotsItem.placeholder">
 						<el-option
 							v-for="(item, itemIndex) in lotsItem.options"
@@ -41,15 +45,18 @@
 				
 			</el-form-item>
 
+			<!-- 时间 -->
 			<el-form-item
 			 	v-else-if="newItem.type === 'time'"
 			 	:label="newItem.label">
 			        <el-date-picker
 			        	type="date"
+			        	v-model="form.date"
 			        	:placeholder="newItem.placeholder"
 			        	></el-date-picker>
 			</el-form-item>
-
+				
+				<!-- submit -->
  				<el-form-item
 			 	v-else-if="newItem.type === 'submit'">
 			        <el-button
@@ -74,15 +81,16 @@ export default{
 	name: 'basic',
 	props: {
 		newData: [],
-		formCss: {}
+		formCss: {},
+		settitle: ''
 	},
 	data () {
 		return {
-			formInline: {
-				user: '',
-				region: ''
-			},
-			title: '发布设置'
+			form: {
+				title: '',
+				select: '',
+				date: ''
+			}
 		}
 	},
 	methods: {

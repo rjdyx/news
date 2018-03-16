@@ -9,8 +9,6 @@
 
 <div class="publish-wrap">
 	<div class="publish-news">
-		<el-row>
-		<el-col :span="24">
 			<title-common :title="title"></title-common>
 			<div class="publish-editor">
 				<quill-editor v-model="content"
@@ -21,11 +19,9 @@
 		            @ready="onEditorReady($event)">
 				</quill-editor>
 			</div>
-			</el-col>
-		</el-row>
 	</div>
 	<div class="publish-form">
-		<form-new :newData="newData" :formCss="formCss"></form-new>
+		<form-new :newData="newData" :formCss="formCss" :settitle="settitle"></form-new>
 	</div>
 </div>
 
@@ -41,6 +37,7 @@ export default{
 			editorOption: {},
 			content: '',
 			title: '内容编写：',
+			settitle: '发布设置',
 			formCss: {
 				width: '70%',
 				margin: '0 auto',

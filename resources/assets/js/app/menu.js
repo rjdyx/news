@@ -14,7 +14,7 @@ export default [
 				name: '编辑消息',
 				children: [
 					{
-						path: '/test',
+						path: '/index/indexNews',
 						name: '首页消息'
 					},
 					{

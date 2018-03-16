@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import { Avatar, Button } from 'iview'
 export default {
 	props: {
 		isCollapse: ''
@@ -45,8 +44,6 @@ export default {
 		}
 	},
 	components: {
-		Avatar,
-		Button
 	}
 }
 </script>

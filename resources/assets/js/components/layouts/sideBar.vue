@@ -26,15 +26,20 @@
 					</template>
 					<template v-for="(subMenu, subIndex) in menu.children">
 						<el-menu-item v-if="!subMenu.children"
-					  		:index="subMenu.path">{{subMenu.name}}</el-menu-item>
+					  		:index="subMenu.path"
+					  		@click="open(subMenu.path)"
+					  		:key="subIndex"
+					  		exact>{{subMenu.name}}</el-menu-item>
 					  	<el-submenu
 					  		v-else
+					  		:key="subIndex"
 					  		:index="subMenu.path">
 					  		<template slot="title">{{subMenu.name}}</template>
 						  <el-menu-item 
 						  	v-for="(childMenu, childIndex) in subMenu.children"
 						  	:index="childMenu.path"
 						  	:key="childIndex"
+						  	@click="open(childMenu.path)"
 						  	>{{childMenu.name}}</el-menu-item>
 						</el-submenu>
 					</template>
@@ -67,6 +72,11 @@ export default {
 		Collapse: false
 	},
 	mounted () {
+	},
+	methods: {
+		open (path) {
+			console.log(path)
+		}
 	}
 }
 </script>
