@@ -52,11 +52,11 @@ export default {
 </script>
 <style lang="sass">
     .header{
-        width: 78%;
+        width: 84%;
         height: 76px;
         background: #fff;
         margin-left: 302px;
-        position: fixed;
+        // position: absolu;
         top: 0;
         .user-dropdown{
             float: right;

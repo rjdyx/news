@@ -76,7 +76,7 @@ export default {
 		width: 100%;
 		height: 100%;
 		&-wrap{
-			position: fixed;
+			position: absolute;
 			left: 0;
 			top: 0;
 			width: 309px;

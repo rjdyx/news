@@ -18,6 +18,10 @@ const routes = [
 					{
 						path: 'publishNews',
 						component: publishNews
+					},
+					{
+						path: 'indexNews',
+						component: publishNews
 					}
 				]
 			}

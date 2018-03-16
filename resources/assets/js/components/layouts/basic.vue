@@ -21,6 +21,7 @@ export default{
 
 <style>
   #basic{
+  	width: 82%;
 	position: absolute;
 	left: 309px;
 	top: 76px;

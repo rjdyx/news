@@ -6,7 +6,7 @@ export default [
 		name: '消息管理',
 		children: [
 			{
-				path: '/',
+				path: '/index/publishNews',
 				name: '发布消息'
 			},
 			{
