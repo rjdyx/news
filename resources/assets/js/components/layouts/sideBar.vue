@@ -8,7 +8,6 @@
 <template>
 	<el-menu
 		:collapse="isCollapse"
-		class="sidebar"
 		background-color="#2c2e2f"
 		text-color="#fff"
 		active-text-color="#ffd04b">
@@ -22,20 +21,23 @@
 					:key="index"
 					:router="$route.path">
 					<template slot="title">
-					 	{{menu.name}}
+						<i :class="menu.icon"></i>
+						<span slot="title">
+							{{menu.name}}
+						</span>
 					</template>
 					<template v-for="(subMenu, subIndex) in menu.children">
 						<el-menu-item v-if="!subMenu.children"
-					  		:index="subMenu.path">{{subMenu.name}}</el-menu-item>
-					  	<el-submenu
-					  		v-else
-					  		:index="subMenu.path">
-					  		<template slot="title">{{subMenu.name}}</template>
-						  <el-menu-item 
-						  	v-for="(childMenu, childIndex) in subMenu.children"
-						  	:index="childMenu.path"
-						  	:key="childIndex"
-						  	>{{childMenu.name}}</el-menu-item>
+							:index="subMenu.path">{{subMenu.name}}</el-menu-item>
+						<el-submenu
+							v-else
+							:index="subMenu.path">
+							<template slot="title">{{subMenu.name}}</template>
+							<el-menu-item 
+							v-for="(childMenu, childIndex) in subMenu.children"
+							:index="childMenu.path"
+							:key="childIndex"
+							>{{childMenu.name}}</el-menu-item>
 						</el-submenu>
 					</template>
 				</el-submenu>
@@ -43,7 +45,10 @@
 					v-else
 					:index="menu.name"
 					:key="index">
-					{{menu.name}}
+					<i :class="menu.icon"></i>
+					<span slot="title">
+						{{menu.name}}
+					</span>
 				</el-menu-item>
 			</template>
     </el-menu>
@@ -69,7 +74,6 @@ export default {
 	watch: {
 		Collapse (nv) {
 			this.isCollapse = nv
-			console.log(nv)
 		}
 	},
 }
