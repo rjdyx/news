@@ -50,15 +50,9 @@
 					<textAndBtn 
 						:placeholder="newItem.placeholder"
 						:name="newItem.name"
-						v-model="formInline[newItem.name]"
-						v-on:addOneColumn="addOneColumn"
+						:arrValue="formInline[newItem.name]"
+						@addOneColumn="addOneColumn"
 					></textAndBtn>
-			       	<!-- <el-input :placeholder="newItem.placeholder" v-model="formInline[newItem.name].value" class="input-with-select">
-				    	<el-button slot="append" @click="addOneColumn(newItem.name)">添加</el-button>
-				  </el-input>
-				  <ul>
-				  	<li v-for="arrItem in formInline[newItem.name].arr">{{arrItem}}</li>
-				  </ul> -->
 			</el-form-item>
 
 		</template>
@@ -92,7 +86,7 @@ export default{
 		let form = {}
 		this.newData.forEach((formItem) => {
 			if (formItem.type === 'textAndBtn') {
-				form[formItem.name] = {value: '', arr: []}
+				form[formItem.name] = ['1', '2']
 			} else {
 				form[formItem.name] = ''
 			}
@@ -123,13 +117,8 @@ export default{
 			console.log(this.formInline)
 		},
 
-		/*
-			添加一个子列表
-		*/
-		addOneColumn (arr) {
-			console.log(arr)
-			this.formInline[key].arr.push(this.formInline[key].value)
-			this.formInline[key].value = ''
+		addOneColumn (obj) {
+			this.formInline[obj.name] = obj.arr
 		}
 	},
 	components: {

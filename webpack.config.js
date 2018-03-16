@@ -172,6 +172,7 @@ let config = {
 
 if (process.env.NODE_ENV === 'development') {
 	config = merge(config, {
+		devtool: '#source-map',
 		plugins: [
 			new webpack.DefinePlugin({
 				'process.env.NODE.ENV': 'development'
