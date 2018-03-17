@@ -121,7 +121,7 @@ export default{
 			this.popEditShow = false
 		},
 		openNew () {
-			this.popEditShow = true
+			this.$router.push('/edit-pic')
 		},
 		changeState () {
 			this.popEditShow = false
