@@ -46,7 +46,7 @@
 				</el-submenu>
 				<el-menu-item
 					v-else
-					:index="menu.name"
+					:index="menu.path"
 					:key="index">
 					<i :class="menu.icon"></i>
 					<span slot="title">
