@@ -14,13 +14,10 @@
 		<el-tabs type="border-card">
 			<el-tab-pane label="上传附件">
 				<el-upload
-				 	class="upload-demo"
-				 	action="https://jsonplaceholder.typicode.com/posts/"
-				 	:on-preview="handlePreview"
-				 	:on-remove="handleRemove"
-				 	:file-list="fileList2"
-				 	list-type="picture">
-				 	<el-button size="small" type="primary">点击上传</el-button>
+				  	action="https://jsonplaceholder.typicode.com/posts/"
+				  	list-type="picture-card"
+				  	:on-remove="handleRemove">
+				  	<i class="el-icon-plus"></i>
 				</el-upload>
 			</el-tab-pane>
 			
