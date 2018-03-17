@@ -72,7 +72,8 @@ export default {
 	data () {
 		return {
 			isCollapse: false,
-			isUniqueOpened: true
+			isUniqueOpened: true,
+			a: 111
 		}
 	},
 	watch: {
