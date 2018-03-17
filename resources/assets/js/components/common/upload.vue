@@ -13,6 +13,12 @@
 		<title-common :title="title" :iconState="iconState" @handleParent="closedForm" />
 		<el-tabs type="border-card">
 			<el-tab-pane label="上传附件">
+				<el-upload
+				  	action="https://jsonplaceholder.typicode.com/posts/"
+				  	list-type="picture-card"
+				  	:on-remove="handleRemove">
+				  	<i class="el-icon-plus"></i>
+				</el-upload>
 			</el-tab-pane>
 			
 			<el-tab-pane label="在线附件">
