@@ -8,20 +8,27 @@
 <template>
 
   <div class="form-wrap">
-	<title-common v-if="isNeedTitle" :title="title"></title-common>
-
-	<el-form :model="formInline">
+  	
+	<title-common :title="settitle"></title-common>
+		
+		<el-form 
+			:model="form" 
+			:class="formCss"
+			label-width="80px">
 		<template v-for="(newItem, index) in newData">
+			<!-- 文本 -->
 			<el-form-item
 				v-if="newItem.type === 'text'"
 				:label="newItem.label">
 				<el-input 
 					v-model="formInline[newItem.name]" 
+
 					:placeholder="newItem.placeholder"></el-input>
 			</el-form-item>
-
+			
+			<!-- 下拉选择 -->
 			<el-form-item 
-				v-else-if="newItem.type === 'selete'"
+				v-else-if="newItem.type === 'selete' && newItem.components"
 				:label="newItem.label">
 				<el-select 
 					v-model="formInline[newItem.name]" 
@@ -54,7 +61,44 @@
 						@addOneColumn="addOneColumn"
 					></textAndBtn>
 			</el-form-item>
+				<template v-for="(lotsItem, lotsIndex) in newItem.components">
+					<el-select 
+						v-model="form.select" 
+						:placeholder="lotsItem.placeholder">
+						<el-option
+							v-for="(item, itemIndex) in lotsItem.options"
+							:label="item.label"
+							:key="itemIndex"
+							:value="item.value">
+						</el-option>
+					</el-select>
+				</template>
+				
+			</el-form-item>
 
+			<!-- 时间 -->
+			<el-form-item
+			 	v-else-if="newItem.type === 'time'"
+			 	:label="newItem.label">
+			        <el-date-picker
+			        	type="date"
+			        	v-model="form.date"
+			        	:placeholder="newItem.placeholder"
+			        	></el-date-picker>
+			</el-form-item>
+				
+				<!-- submit -->
+ 				<el-form-item
+			 	v-else-if="newItem.type === 'submit'">
+			        <el-button
+			        	:type="newItem.btntype"
+			        	>
+			        	<span v-if="newItem.icon">
+			        		<i :class="newItem.icon"></i>
+			        	</span>
+			        {{newItem.value}}</el-button>
+				</el-form-item>
+ 			
 		</template>
 	
 			<el-form-item>
@@ -73,6 +117,7 @@ import TextAndBtn from 'components/common/textAndBtn.vue'
 export default{
 	name: 'basic',
 	props: {
+<<<<<<< HEAD
 		isNeedTitle: {
 			type: Boolean,
 			default: true
@@ -81,6 +126,11 @@ export default{
 			type: Array,
 			default: []
 		},
+=======
+		newData: [],
+		formCss: {},
+		settitle: ''
+>>>>>>> Denton
 	},
 	data () {
 		let form = {}
@@ -93,12 +143,20 @@ export default{
 		})
 		console.log(form)
 		return {
+<<<<<<< HEAD
 			// formInline: {
 			// 	user: '',
 			// 	region: ''
 			// },
 			formInline: form,
 			title: '发布设置'
+=======
+			form: {
+				title: '',
+				select: '',
+				date: ''
+			}
+>>>>>>> Denton
 		}
 	},
 	methods: {
@@ -127,11 +185,19 @@ export default{
 	}
 }
 </script>
-
+ 
 <style lang="sass">
 .form{
 	&-wrap{
 		padding: 20px;
+	}
+	&-demo{
+		width: 70%;
+		margin: 0 auto;
+		padding: 20px;
+		.el-select{
+			margin-right: 30px
+		}
 	}
 }
 </style>

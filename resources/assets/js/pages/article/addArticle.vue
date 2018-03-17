@@ -9,8 +9,6 @@
 
 <div class="publish-wrap">
 	<div class="publish-news">
-		<el-row>
-		<el-col :span="24">
 			<title-common :title="title"></title-common>
 			<div class="publish-editor">
 				<quill-editor v-model="content"
@@ -21,11 +19,9 @@
 		            @ready="onEditorReady($event)">
 				</quill-editor>
 			</div>
-			</el-col>
-		</el-row>
 	</div>
 	<div class="publish-form">
-		<form-new :newData="newData"></form-new>
+		<form-new :newData="newData" :formCss="formCss" :settitle="settitle"></form-new>
 	</div>
 </div>
 
@@ -41,35 +37,63 @@ export default{
 			editorOption: {},
 			content: '',
 			title: '内容编写：',
+			settitle: '发布设置',
+			formCss: {
+				width: '70%',
+				margin: '0 auto',
+				padding: '20px'
+			},
 			newData: [{
 				name: 'title',
 				type: 'text',
-				placeholder: '请写入标题',
-				label: '标题:',
+				placeholder: '标题长度：1~255',
+				label: '消息标题:',
 			},
 			{
 				name: 'title',
 				type: 'selete',
-				placeholder: '请写入标题',
-				label: '标题:',
-				options: [{
-					value: '亩',
-					label: '亩'
+				label: '所属栏目:',
+				components: [{
+					options: [{
+						value: '亩',
+						label: '亩'
+					},
+					{
+						value: '平方米',
+						label: '平方米'
+					},
+					{
+						value: '公顷',
+						label: '公顷'
+					}]
 				},
 				{
-					value: '平方米',
-					label: '平方米'
-				},
-				{
-					value: '公顷',
-					label: '公顷'
+					options: [{
+						value: '亩',
+						label: '亩'
+					},
+					{
+						value: '平方米',
+						label: '平方米'
+					},
+					{
+						value: '公顷',
+						label: '公顷'
+					}]
 				}]
 			},
 			{
 				name: 'title',
 				type: 'time',
 				placeholder: '请写入标题',
-				label: '标题:'
+				label: '发布日期:'
+			},
+			{
+				name: 'title',
+				type: 'submit',
+				btntype: 'success',
+				value: '发布',
+				icon: 'el-icon-check'
 			}]
 		}
 	},

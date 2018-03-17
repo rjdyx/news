@@ -16,7 +16,7 @@ require('sass/app.scss')
 import enLocale from 'element-ui/lib/locale/lang/en'
 import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
 import locale from 'element-ui/lib/locale'
-import 'element-ui/lib/theme-chalk/index.css'
+import 'element-ui/lib/theme-default/index.css'
 // 设置语言
 switch (require('projectRoot/env.js').app_lang) {
 case 'zh-CN':
@@ -29,6 +29,8 @@ default:
 	locale.use(zhLocale)
 }
 import * as elementComponent from './element-ui.js'
+
+import * as iviewComponent from './iview.js'
 
 /**
 * 饿了么组件按需引用组件有两种方式，其中Vue.use可能会导致属性冲突，故不推荐使用
@@ -59,4 +61,7 @@ Object.keys(elementComponent).forEach(function (component) {
 		Vue.use(elementComponent[component])
 		break
 	}
+})
+Object.keys(iviewComponent).forEach(function (component) {
+	Vue.component(iviewComponent[component].name, iviewComponent[component])
 })
