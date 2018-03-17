@@ -21,17 +21,17 @@
 	</el-input>
 	<ul>
 		<li v-for="(item, i) in arr" class="clearfix" :key="i">
-			<div v-if="bolArr[i]">
-				<el-input size="small" :value='item' style="width: 200px"></el-input>
+			<div v-if="bolArr[i].bol">
+				<el-input size="small" v-model='bolArr[i].value' style="width: 200px"></el-input>
 				<span class="fr">
-					<i class="el-icon-check mr10 pointer" @click="submitColumn(i)"></i>
+					<i class="el-icon-check mr10 pointer" @click="submitSubColumn(i)">√</i>
 				</span>
 			</div>
 			<div v-else>
 				<span>{{item}}</span>
 				<span class="fr">
-		        	<i class="el-icon-edit mr10 pointer" @click="editSubColumn(i)"></i>
-		        	<i class="el-icon-delete pointer" @click="delSubColumn(i)"></i>
+		        	<i class="el-icon-edit mr10 pointer" @click="editSubColumn(i)">edit</i>
+		        	<i class="el-icon-delete pointer" @click="delSubColumn(i)">del</i>
 		        </span>
 	        </div>
 		</li>
@@ -58,8 +58,8 @@ export default{
 	},
 	data () {
 		let bolArr = []
-		this.arrValue.forEach(() => {
-			bolArr.push(false)
+		this.arrValue.forEach((item) => {
+			bolArr.push({value: item, bol: false})
 		})
 		return {
 			value: '',
@@ -76,21 +76,34 @@ export default{
 				return
 			}
 			this.arr.push(this.value)
+			this.bolArr.push({value: this.value, bol: false})
 			this.value = ''
 			this.$emit('addOneColumn', {name: this.name, arr: this.arr})
 		},
 
+		// 点击编辑子栏目
 		editSubColumn (i) {
-			this.bolArr.splice(i, 1, true)
+			let sub = this.bolArr[i]
+			sub.bol = true
+			this.bolArr.splice(i, 1, sub)
 		},
 
+		// 点击删除子栏目
 		delSubColumn (i) {
 			console.log(i)
 			this.arr.splice(i, 1)
+			this.bolArr.splice(i, 1)
 			this.$emit('addOneColumn', {name: this.name, arr: this.arr})
 		},
 
-		submitColumn (i) {
+		// 点击√提交子栏目
+		submitSubColumn (i) {
+			let sub = this.bolArr[i]
+			this.arr.splice(i, 1, sub.value)
+			console.log(this.arr)
+			this.$emit('addOneColumn', {name: this.name, arr: this.arr})
+			sub.bol = false
+			this.bolArr.splice(i, 1, sub)
 		}
 	}
 }

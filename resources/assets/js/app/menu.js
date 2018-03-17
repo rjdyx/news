@@ -21,7 +21,7 @@ export default [
 					{
 						path: '/defaultMsg',
 						name: '默认消息'
-					},
+					}
 				]
 			},
 			{

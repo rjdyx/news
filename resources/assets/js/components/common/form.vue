@@ -9,7 +9,7 @@
 
   <div class="form-wrap">
   	
-	<title-common :title="title"></title-common>
+	<title-common v-if="isNeedTitle" :title="title"></title-common>
 		
 		<el-form 
 			:model="form" 
@@ -92,6 +92,7 @@
 			 	v-else-if="newItem.type === 'submit'">
 			        <el-button
 			        	:type="newItem.btntype"
+			        	@click="onSubmit"
 			        	>
 			        	<span v-if="newItem.icon">
 			        		<i :class="newItem.icon"></i>
@@ -101,7 +102,7 @@
  			
 		</template>
 	
-			<el-form-item>
+			<el-form-item v-if="showFooter">
 			  	<el-button @click="cancel">取消</el-button>
 			  	<el-button type="primary" @click="onSubmit">保存</el-button>
 			</el-form-item>
@@ -117,25 +118,56 @@ import TextAndBtn from 'components/common/textAndBtn.vue'
 export default{
 	name: 'basic',
 	props: {
+		// 是否需要title
 		isNeedTitle: {
 			type: Boolean,
 			default: true
 		},
+
+		// form表单的各个input类型，name...（不包括数据）
 		newData: {
 			type: Array,
 			default: []
+		},
+
+		// form表单各个input的数据
+		data: {
+			type: Object,
+			default () {
+				return {}
+			}
+		},
+
+		// 是否需要表单提交取消按钮
+		showFooter: {
+			type: Boolean,
+			default: true
+		},
+
+		// form的类型：add/edit
+		type: {
+			type: String,
+			default: 'add'
 		}
 	},
 	data () {
 		let form = {}
-		this.newData.forEach((formItem) => {
-			if (formItem.type === 'textAndBtn') {
-				form[formItem.name] = ['1', '2']
-			} else {
-				form[formItem.name] = ''
-			}
-		})
+		if (this.type === 'add') {
+			this.newData.forEach((formItem) => {
+				if (formItem.type === 'textAndBtn') {
+					form[formItem.name] = []
+					// 如果是
+				} else {
+					form[formItem.name] = ''
+				}
+			})
+		} else {
+			this.newData.forEach((formItem) => {
+				form[formItem.name] = this.data[formItem.name]
+			})
+		}
 		console.log(form)
+		console.log(this.data)
 		return {
 			// formInline: {
 			// 	user: '',
@@ -150,6 +182,11 @@ export default{
 			}
 		}
 	},
+
+	mounted () {
+		console.log(1111)
+	},
+
 	methods: {
 		/*
 			取消弹窗
@@ -168,6 +205,7 @@ export default{
 
 		addOneColumn (obj) {
 			this.formInline[obj.name] = obj.arr
+			console.log(this.formInline)
 		}
 	},
 	components: {
