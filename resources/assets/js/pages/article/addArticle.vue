@@ -21,7 +21,7 @@
 			</div>
 	</div>
 	<div class="publish-form">
-		<form-new :newData="newData" :formCss="formCss" :settitle="settitle"></form-new>
+		<form-new :newData="newData" :formCss="formCss" :settitle="settitle" :showFooter="false"></form-new>
 	</div>
 </div>
 
