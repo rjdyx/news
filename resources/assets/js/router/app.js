@@ -5,13 +5,10 @@ Vue.use(Router)
 import index from '../app/index.vue'
 import basic from 'components/layouts/basic.vue'
 import publishNews from 'pages/publish-news.vue'
-<<<<<<< HEAD
 import indexNews from 'pages/index-news.vue'
 import basicContent from 'components/layouts/basic-content.vue'
-=======
 import addColumn from '../pages/navManage/addColumn.vue'
 import editColumn from '../pages/navManage/editColumn.vue'
->>>>>>> dev
 
 const routes = [
 	{
