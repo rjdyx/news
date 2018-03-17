@@ -16,7 +16,8 @@
 	<div class="publish-form">
 		<form-new 
 			:newData="newData"
-			:settitle="formtitle" />
+			:settitle="formtitle"
+			 />
 	</div>
 	</div>
 </div>

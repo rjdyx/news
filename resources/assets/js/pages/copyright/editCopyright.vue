@@ -14,7 +14,7 @@
 		<form-new
 			:newData="formData"
 			:isNeedTitle="false"
-			:isNeedOperate="false"
+			:showFooter="false"
 			@cancel="closeEditPop" />
 	</div>
 </div>

@@ -9,7 +9,9 @@
 
 <div class="addLinks-wrap">
 	<div class="publish-form">
-		<form-new :newData="newData" :settitle="settitle"></form-new>
+		<form-new :newData="newData" 
+			:settitle="settitle"
+			:showFooter="false"></form-new>
 	</div>
 </div>
 
