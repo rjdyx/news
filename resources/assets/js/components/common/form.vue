@@ -9,36 +9,31 @@
 
   <div class="form-wrap">
   	
-	<title-common :title="title"></title-common>
+	<title-common :title="settitle" v-if="isNeedTitle"></title-common>
 		
 		<el-form 
 			:model="form" 
-			label-width="80px">
+			label-width="120px">
 		<template v-for="(newItem, index) in newData">
+
+			<!-- 预览图 -->
+			<el-form-item
+				v-if="newItem.type === 'preview'"
+				:label="newItem.label">
+				<img src="image/test.jpg" alt="" class="form-preview">
+			</el-form-item>
+
 			<!-- 文本 -->
 			<el-form-item
 				v-if="newItem.type === 'text'"
 				:label="newItem.label">
-				<el-input 
+				<el-input
+					:value="newItem.value"
 					v-model="formInline[newItem.name]" 
-					:placeholder="newItem.placeholder"></el-input>
+					:placeholder="newItem.placeholder" />
 			</el-form-item>
 			
-			<!-- 下拉选择 -->
-			<el-form-item 
-				v-else-if="newItem.type === 'selete' && newItem.components"
-				:label="newItem.label">
-				<el-select 
-					v-model="formInline[newItem.name]" 
-					:placeholder="newItem.placeholder">
-					<el-option
-						v-for="item in newItem.options"
-						:label="item.label"
-						:value="item.value">
-					</el-option>
-				</el-select>
-			</el-form-item>
-
+			<!-- 时间 -->
 			<el-form-item
 				v-else-if="newItem.type === 'time'"
 				:label="newItem.label">
@@ -60,12 +55,13 @@
 					></textAndBtn>
 			</el-form-item>
 
-			<!-- 下拉框 -->
-			<el-form-item v-else-if="newItem.type === 'selete'">
-				<template v-for="(lotsItem, lotsIndex) in newItem.components">
-					<el-select 
-						v-model="form.select" 
-						:placeholder="lotsItem.placeholder">
+			<!-- 多个下拉框【修改14:41】 -->
+			<el-form-item 
+				v-else-if="newItem.type === 'selete'"
+				:label="newItem.label">
+					<el-select
+						v-model="form.select"
+						v-for="(lotsItem, lotsIndex) in newItem.components">
 						<el-option
 							v-for="(item, itemIndex) in lotsItem.options"
 							:label="item.label"
@@ -73,7 +69,6 @@
 							:value="item.value">
 						</el-option>
 					</el-select>
-				</template>
 			</el-form-item>
 
 			<!-- 时间 -->
@@ -85,6 +80,57 @@
 			        	v-model="form.date"
 			        	:placeholder="newItem.placeholder"
 			        	></el-date-picker>
+			</el-form-item>
+
+			<!-- 开关 -->
+			<el-form-item
+			 	v-else-if="newItem.type === 'switch'"
+			 	:label="newItem.label">
+			        <el-switch
+					  	v-model="form.switch"
+					  	active-color="#eee"
+					  	inactive-color="#13ce66">
+					</el-switch>
+			</el-form-item>
+
+			<!-- 多行文本 -->
+			<el-form-item
+			 	v-else-if="newItem.type === 'textarea'"
+			 	:label="newItem.label">
+			        <el-input 
+			        	:value="newItem.value"
+			        	type="textarea" 
+			        	v-model="form.desc" />
+			</el-form-item>
+
+			<!-- file -->
+			<el-form-item
+			 	v-else-if="newItem.type === 'file'"
+			 	:label="newItem.label">
+			 		<el-button type="default" @click="openUpload">
+			 			<i class="el-icon-picture-outline"></i>
+			 			选择图片
+			 		</el-button>
+			        <multiple-upload 
+			        	v-if="isShowUpload"
+			        	@changeState="changeState"/>
+			        <el-button type="default" @click="openNews">
+			 			<i class="el-icon-document"></i>
+			 			关联新闻</el-button>
+			 		<div class="form-popform" v-if="popNews">
+						<div class="form-popcontent">
+							<title-common :title="NewsTitle" />
+							<card 
+								:lists="lists"
+								:iconArr="iconArr"
+								:hasCheck="hasCheck"
+								/>
+							<page></page>
+							<el-button type="primary" @click="CloseNews">
+					 			确定
+					 		</el-button>
+						</div>
+					</div>
 			</el-form-item>
 				
 				<!-- submit -->
@@ -101,7 +147,7 @@
  			
 		</template>
 	
-			<el-form-item>
+			<el-form-item v-if="isNeedOperate">
 			  	<el-button @click="cancel">取消</el-button>
 			  	<el-button type="primary" @click="onSubmit">保存</el-button>
 			</el-form-item>
@@ -114,12 +160,20 @@
 <script>
 import TitleCommon from 'components/common/title.vue'
 import TextAndBtn from 'components/common/textAndBtn.vue'
+import MultipleUpload from 'components/common/multiple-upload.vue'
+import Card from 'components/common/card.vue'
+import Page from 'components/common/pagination.vue'
 export default{
 	name: 'basic',
 	props: {
+		settitle: '',
 		isNeedTitle: {
 			type: Boolean,
 			default: true
+		},
+		isNeedOperate: {
+			type: Boolean,
+			default: false
 		},
 		newData: {
 			type: Array,
@@ -137,16 +191,30 @@ export default{
 		})
 		console.log(form)
 		return {
+			isShowUpload: false,
+			popNews: false,
+			hasCheck: true,
 			// formInline: {
 			// 	user: '',
 			// 	region: ''
 			// },
+			NewsTitle: '新闻列表',
 			formInline: form,
 			title: '发布设置',
 			form: {
 				title: '',
 				select: '',
 				date: ''
+			},
+			lists: [{
+				txt: '邓音乐教授课题组在PNAS发表重要研究成果'
+			},
+			{
+				txt: '广东省农林生物质工程技术研究中心建设论证会在我校召开'
+			}],
+			iconArr: {
+				edit: false,
+				delete: false
 			}
 		}
 	},
@@ -168,11 +236,27 @@ export default{
 
 		addOneColumn (obj) {
 			this.formInline[obj.name] = obj.arr
+		},
+		changeState () {
+			this.isShowUpload = false
+		},
+		openUpload () {
+			this.isShowUpload = true
+		},
+		openNews () {
+			this.popNews = true
+		},
+		CloseNews () {
+			this.popNews = false
 		}
+
 	},
 	components: {
 		TitleCommon,
-		TextAndBtn
+		TextAndBtn,
+		MultipleUpload,
+		Card,
+		Page
 	}
 }
 </script>
@@ -190,6 +274,31 @@ export default{
 			margin-right: 30px
 		}
 	}
+	&-preview{
+		width: 300px;
+		height: 200px;
+	}
+	&-popform{
+  		position: fixed;
+  		width: 100%;
+  		height: 100%;
+  		background: rgba(0,0,0,.5);
+  		top: 0;
+  		left: 0;
+  		z-index: 100000;
+  	}
+  	&-popcontent{
+  		width: 50%;
+  		height: 50%;
+  		top:0;
+        right:0;
+        bottom:0;
+        left:0;
+        margin:auto;
+  		position: absolute;
+  		background: #fff;
+  		padding: 20px;
+  	}
 }
 </style>
 

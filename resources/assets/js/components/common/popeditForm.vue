@@ -9,14 +9,14 @@
 
 <div class="popedit-wrap">
 	<div  class="popedit-content">
-		<div >
-		<title-common :title="title" :iconState="iconState" @handleParent="closedForm"></title-common>
+		<title-common :title="editTitle" :iconState="isHasIcon" @handleParent="closedForm" />
 		<div class="publish-editor">
-			<editor></editor>
+			<editor />
 		</div>
-	</div>
 	<div class="publish-form">
-		<form-new :newData="newData" :formCss="formCss"></form-new>
+		<form-new 
+			:newData="newData"
+			:settitle="formtitle" />
 	</div>
 	</div>
 </div>
@@ -29,72 +29,19 @@ import Editor from 'components/common/editor.vue'
 import FormNew from 'components/common/form.vue'
 export default{
 	name: 'PublishNews',
+	props: {
+		editTitle: '',
+		isHasIcon: {},
+		formtitle: '',
+		newData: {
+			type: Array,
+			default () {
+				return []
+			}
+		}
+	},
 	data () {
 		return {
-			editorOption: {},
-			content: '',
-			iconState: {
-				class: 'el-icon-close',
-				state: true
-			},
-			title: '编辑消息',
-			formCss: {
-				width: '70%',
-				margin: '0 auto',
-				padding: '20px'
-			},
-			newData: [{
-				name: 'title',
-				type: 'text',
-				placeholder: '标题长度：1~255',
-				label: '消息标题:',
-			},
-			{
-				name: 'title',
-				type: 'selete',
-				label: '所属栏目:',
-				components: [{
-					options: [{
-						value: '亩',
-						label: '亩'
-					},
-					{
-						value: '平方米',
-						label: '平方米'
-					},
-					{
-						value: '公顷',
-						label: '公顷'
-					}]
-				},
-				{
-					options: [{
-						value: '亩',
-						label: '亩'
-					},
-					{
-						value: '平方米',
-						label: '平方米'
-					},
-					{
-						value: '公顷',
-						label: '公顷'
-					}]
-				}]
-			},
-			{
-				name: 'title',
-				type: 'time',
-				placeholder: '请写入标题',
-				label: '发布日期:'
-			},
-			{
-				name: 'title',
-				type: 'submit',
-				btntype: 'success',
-				value: '发布',
-				icon: 'el-icon-check'
-			}]
 		}
 	},
 	methods: {

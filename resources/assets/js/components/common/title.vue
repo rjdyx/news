@@ -34,6 +34,8 @@ export default{
   	margin-bottom: 20px;
   	.title {
 		display: inline-block;
+		font-size: 17px;
+		font-weight: normal;
   	}
   	i{
   		float: right;

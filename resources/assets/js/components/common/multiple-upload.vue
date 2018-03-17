@@ -12,7 +12,7 @@
 		<div >
 		<title-common :title="title" :iconState="iconState" @handleParent="closedForm" />
 		<el-tabs type="border-card">
-			<el-tab-pane label="上传附件">
+			<el-tab-pane label="插入图片">
 				<el-upload
 				  	action="https://jsonplaceholder.typicode.com/posts/"
 				  	list-type="picture-card"
@@ -21,12 +21,17 @@
 				</el-upload>
 			</el-tab-pane>
 			
-			<el-tab-pane label="在线附件" />
-
+			<el-tab-pane label="本地上传">
+			</el-tab-pane>
+			<el-tab-pane label="在线管理">
+			</el-tab-pane>
+			<el-tab-pane label="图片搜索">
+			</el-tab-pane>
+			
 		</el-tabs>
 		<div class="upload-operate">
 			<el-button type="primary" @click="onSubmit">确认</el-button>
-    		<el-button>取消</el-button>
+    		<el-button @click="closedForm">取消</el-button>
 		</div>
 		</div>
 	</div>
@@ -44,12 +49,12 @@ export default{
 				class: 'el-icon-close',
 				state: true
 			},
-			title: '附件'
+			title: '多图上传'
 		}
 	},
 	methods: {
 		closedForm () {
-			this.$parent.changeState()
+			this.$emit('changeState')
 		},
 		handleRemove () {
 			console.log('obj')

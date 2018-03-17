@@ -35,10 +35,11 @@ import manageCategory from '../pages/friendLink/manageCategory.vue'
 
 // 版权信息管理 ------------------------------------
 // 修改版权信息
-import editCopyright from '../pages/editCopyright.vue'
+import editCopyright from '../pages/copyright/editCopyright.vue'
 
 // 图片新闻管理
-import picNews from '../pages/picNews.vue'
+import picNews from '../pages/picNews/picNews.vue'
+import editPic from '../pages/picNews/editPic.vue'
 
 // 浮动图片管理
 import floatPic from '../pages/floatPic.vue'
@@ -91,12 +92,7 @@ const routes = [
 					{
 						path: 'addColumn',
 						component: addColumn
-					},
-					{
-						path: '/edit-model/:sequence',
-						name: 'edit-model',
-						component: editModel,
-					},
+					}
 				]
 			},
 			// 下载中心
@@ -149,6 +145,12 @@ const routes = [
 				path: 'pic-news',
 				name: 'pic-news',
 				component: picNews
+			},
+			// 编辑图片新闻管理 ------------------------------------
+			{
+				path: 'edit-pic',
+				name: 'edit-pic',
+				component: editPic
 			},
 			// 浮动图片管理 ------------------------------------
 			{

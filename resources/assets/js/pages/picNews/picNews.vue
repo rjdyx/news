@@ -1,40 +1,31 @@
 /**
  * 
- * 管理分类组件
+ * 图片新闻列表组件
  * @author 
  * @date 2018/03/17
  * 
  */
 <template>
 
-<div class="manage-wrap">
-	<div class="manage-news">
+<div class="pic-wrap">
+	<div class="pic-news">
 		<title-common 
-			:title="title" 
-			:iconState="iconState"
-			@handleParent="openModel"></title-common>
+			:title="title"></title-common>
 		<Card 
 			:lists="srcLists" 
 			:iconArr="iconArr"
 			@handleEditOpen="handleEditOpen" />
-		<!-- 新增 -->
-		<div class="manage-popform" v-if="popNewShow">
-			<div class="manage-popcontent">
-				<form-new
-					:newData="newData"
-					:settitle="newtitle"
-					:isNeedOperate="true"
-					@cancel="closeNewPop"></form-new>
-			</div>
+		<div class="pic-newBtn">
+			<el-button @click="openNew">新增</el-button>
 		</div>
-		<!-- 新增 -->
+		<!-- 编辑 -->
 		<div class="manage-popform" v-if="popEditShow">
 			<div class="manage-popcontent">
-				<form-new
-					:newData="editData"
-					:settitle="edittitle"
-					:isNeedOperate="true"
-					@cancel="closeEditPop"></form-new>
+				<pop-form 
+					:editTitle="editTitle"
+					:isHasIcon="isHasIcon"
+					:formtitle="formtitle"
+					:newData="editData"/>
 			</div>
 		</div>
 	</div>
@@ -44,18 +35,19 @@
 
 <script>
 import TitleCommon from 'components/common/title.vue'
-import FormNew from 'components/common/form.vue'
+import PopForm from 'components/common/popeditForm.vue'
 import Card from 'components/common/card.vue'
 
 export default{
 	name: 'download',
 	data () {
 		return {
-			title: '分类列表',
-			popNewShow: false,
+			title: '图片新闻列表:',
+			editTitle: '新增消息',
+			formtitle: '修改设置',
 			popEditShow: false,
-			iconState: {
-				class: 'el-icon-circle-plus',
+			isHasIcon: {
+				class: 'el-icon-close',
 				state: true
 			},
 			srcLists: [{
@@ -67,19 +59,57 @@ export default{
 				edit: true,
 				delete: true
 			},
-			newtitle: '新增分类',
-			newData: [{
-				name: 'title',
-				type: 'text',
-				placeholder: '长度：1~100',
-				label: '分类名称:',
-			}],
-			edittitle: '编辑分类',
 			editData: [{
 				name: 'title',
 				type: 'text',
-				placeholder: '长度：1~100',
-				label: '分类名称:',
+				placeholder: '标题长度：1~255',
+				label: '消息标题:',
+			},
+			{
+				name: 'title',
+				type: 'selete',
+				label: '所属栏目:',
+				components: [{
+					options: [{
+						value: '亩',
+						label: '亩'
+					},
+					{
+						value: '平方米',
+						label: '平方米'
+					},
+					{
+						value: '公顷',
+						label: '公顷'
+					}]
+				},
+				{
+					options: [{
+						value: '亩',
+						label: '亩'
+					},
+					{
+						value: '平方米',
+						label: '平方米'
+					},
+					{
+						value: '公顷',
+						label: '公顷'
+					}]
+				}]
+			},
+			{
+				name: 'title',
+				type: 'time',
+				placeholder: '请写入标题',
+				label: '发布日期:'
+			},
+			{
+				name: 'title',
+				type: 'submit',
+				btntype: 'success',
+				value: '发布',
+				icon: 'el-icon-check'
 			}]
 		}
 	},
@@ -90,15 +120,15 @@ export default{
 		closeEditPop () {
 			this.popEditShow = false
 		},
-		openModel () {
-			this.popNewShow = true
+		openNew () {
+			this.popEditShow = true
 		},
-		closeNewPop () {
-			this.popNewShow = false
+		changeState () {
+			this.popEditShow = false
 		}
 	},
 	components: {
-		FormNew,
+		PopForm,
 		TitleCommon,
 		Card,
 	}
@@ -106,18 +136,23 @@ export default{
 </script>
 
 <style lang="sass">
-  .manage{
+  .pic{
   	&-wrap{
   		background: #eee;
   	}
   	&-news{
   		padding: 20px;
   		background: #fff;
+  		overflow: hidden;
   	}
   	&-title{
 		border-bottom: 2px solid #f5f5f5;
   		font-size: 17px;
   		padding: 0 0 15px;
+  	}
+  	&-newBtn{
+  		margin-top: 20px;
+  		float: right;
   	}
   	&-popform{
   		position: fixed;

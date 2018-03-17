@@ -1,6 +1,6 @@
 /**
  * 
- * 浮动图片组件
+ * 版权信息组件
  * @author 
  * @date 2018/03/17
  * 
@@ -29,7 +29,7 @@ export default{
 	name: 'download',
 	data () {
 		return {
-			title: '浮动图片管理',
+			title: '修改底部栏信息',
 			popEditShow: false,
 			iconState: {
 				class: 'el-icon-circle-plus',
@@ -37,31 +37,45 @@ export default{
 			},
 			formData: [{
 				name: 'address',
-				type: 'preview',
-				label: '预览图:',
+				type: 'text',
+				value: '广州市天河区五山路483号华南农业大学行政楼902',
+				label: '地址:',
 			},
 			{
 				name: 'email',
-				type: 'switch',
-				label: '否在首页显示:',
+				type: 'text',
+				value: 'sysjs@scau.edu.cn',
+				label: '邮箱:',
 			},
 			{
 				name: 'postcode',
-				type: 'file',
+				type: 'text',
 				value: '510642',
-				label: '相关操作:',
+				label: '邮编:',
 			},
 			{
 				name: 'phone',
 				type: 'text',
 				value: '020-85285029',
-				label: '关联的新闻:',
+				label: '电话:',
+			},
+			{
+				name: 'title',
+				type: 'fax',
+				value: '020-85285029',
+				label: '传真:',
+			},
+			{
+				name: 'copyright',
+				type: 'textarea',
+				value: 'Copyright © 华南农业大学重点实验室建设办公室',
+				label: '版权信息:',
 			},
 			{
 				name: 'submit',
 				type: 'submit',
 				btntype: 'primary',
-				value: '保存'
+				value: '提交'
 			}]
 		}
 	},

@@ -15,6 +15,7 @@
 			  	<div class="tabpane-icon">
 			  		<i :class="list.edit" @click="handleEdit" v-if="iconArr.edit" />
 			  		<i :class="list.delete" :data-txt="list.txt" v-if="iconArr.delete" @click="handleDelete" />
+			  		<el-checkbox v-if="hasCheck"/>
 			 	</div>
 			</div>
 		</el-card>
@@ -32,7 +33,13 @@ export default{
 				return []
 			}
 		},
-		iconArr: {}
+		iconArr: {},
+		hasCheck: {
+			type: Boolean,
+			default () {
+				return false
+			}
+		}
 	},
 	data () {
 		return {
@@ -43,7 +50,7 @@ export default{
 			console.log('obj')
 		},
 		handleDelete (e) {
-			this.$alert(e.target.dataset.txt, '删除消息', {
+			this.$alert('确定要删除：' + e.target.dataset.txt, '删除消息', {
 				confirmButtonText: '确定',
 				callback: action => {
 					this.$message({

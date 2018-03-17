@@ -18,7 +18,12 @@
 					  @handleEditOpen="openEdit"></Card>
 			</el-tab-pane>
 		</el-tabs>
-		<EditForm v-if="isEdit"></EditForm>
+		<EditForm
+			v-if="isEdit"
+			:editTitle="editTitle"
+			:isHasIcon="isHasIcon"
+			:formtitle="formtitle"
+			:newData="newData" />
 	</div>
 
 </template>
@@ -38,11 +43,69 @@ export default{
 	},
 	data () {
 		return {
+			editTitle: '编辑消息',
+			formtitle: '修改设置',
 			isEdit: false,
+			isHasIcon: {
+				class: 'el-icon-close',
+				state: true
+			},
 			iconArr: {
 				edit: true,
 				delete: true
-			}
+			},
+			newData: [{
+				name: 'title',
+				type: 'text',
+				placeholder: '标题长度：1~255',
+				label: '消息标题:',
+			},
+			{
+				name: 'title',
+				type: 'selete',
+				label: '所属栏目:',
+				components: [{
+					options: [{
+						value: '亩',
+						label: '亩'
+					},
+					{
+						value: '平方米',
+						label: '平方米'
+					},
+					{
+						value: '公顷',
+						label: '公顷'
+					}]
+				},
+				{
+					options: [{
+						value: '亩',
+						label: '亩'
+					},
+					{
+						value: '平方米',
+						label: '平方米'
+					},
+					{
+						value: '公顷',
+						label: '公顷'
+					}]
+				}]
+			},
+			{
+				name: 'title',
+				type: 'time',
+				placeholder: '请写入标题',
+				label: '发布日期:'
+			},
+			{
+				name: 'title',
+				type: 'submit',
+				btntype: 'success',
+				value: '发布',
+				icon: 'el-icon-check'
+			}]
 		}
 	},
 	methods: {

@@ -59,6 +59,9 @@ export default{
 		},
 		openModel () {
 			this.isShowUpload = true
+		},
+		changeState () {
+			this.isShowUpload = false
 		}
 	},
 	components: {
