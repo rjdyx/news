@@ -8,29 +8,24 @@
 
 	<div class="tabpane-wrap">
 		<el-tabs type="border-card">
-			<el-tab-pane 
+			<el-tab-pane
 				v-for="(tab, index) in tabData"
 				:label="tab.label">
 				{{tab.content}}
 				<!-- list -->
-				<el-card>
-					<div class="bottom clearfix" 
-						v-if="tab.lists"
-						v-for="(list, liIndex) in tab.lists">
-					  	<span class="time">{{list.txt}}</span>
-					  	<div class="tabpane-icon">
-					  		<i :class="list.edit" />
-					  		<i :class="list.delete" />
-					 	</div>
-					</div>
-				</el-card>
+				<Card :lists="tab.lists" 
+					  :iconArr="iconArr"
+					  @handleEditOpen="openEdit"></Card>
 			</el-tab-pane>
 		</el-tabs>
+		<EditForm v-if="isEdit"></EditForm>
 	</div>
 
 </template>
 
 <script>
+import EditForm from 'components/common/popeditForm.vue'
+import Card from 'components/common/card.vue'
 export default{
 	name: 'tabpane',
 	props: {
@@ -43,14 +38,39 @@ export default{
 	},
 	data () {
 		return {
+			isEdit: false,
+			iconArr: {
+				edit: true,
+				delete: true
+			}
 		}
 	},
 	methods: {
 		onSubmit () {
 			console.log('obj')
+		},
+		handleDelete (e) {
+			this.$alert(e.target.dataset.txt, '删除消息', {
+				confirmButtonText: '确定',
+				callback: action => {
+					this.$message({
+						type: 'info',
+						massage: `action: ${action}`
+					})
+				}
+			})
+		},
+		openEdit () {
+			this.isEdit = !this.Edit
+		},
+		changeState () {
+			console.log('obj')
+			this.isEdit = false
 		}
 	},
 	components: {
+		EditForm,
+		Card
 	}
 }
 </script>

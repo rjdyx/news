@@ -1,31 +1,22 @@
 /**
  * 
- * 发布消息组件
+ * 下载中心组件
  * @author 
- * @date 2018/03/15
+ * @date 2018/03/17
  * 
  */
 <template>
 
-<div class="publish-wrap">
-	<div class="publish-news">
-		<el-row>
-		<el-col :span="24">
-			<title-common :title="title"></title-common>
-			<div class="publish-editor">
-				<quill-editor v-model="content"
-		            ref="myQuillEditor"
-		            :options="editorOption"
-		            @blur="onEditorBlur($event)"
-		            @focus="onEditorFocus($event)"
-		            @ready="onEditorReady($event)">
-				</quill-editor>
-			</div>
-			</el-col>
-		</el-row>
-	</div>
-	<div class="publish-form">
-		<form-new :newData="newData"></form-new>
+<div class="download-wrap">
+	<div class="download-news">
+		<title-common 
+			:title="title" 
+			:iconState="iconState"
+			@handleParent="openModel"></title-common>
+		<Card 
+			:lists="srcLists" 
+			:iconArr="iconArr" />
+		<Upload v-if="isShowUpload"></Upload>
 	</div>
 </div>
 
@@ -34,43 +25,26 @@
 <script>
 import TitleCommon from 'components/common/title.vue'
 import FormNew from 'components/common/form.vue'
+import Card from 'components/common/card.vue'
+import Upload from 'components/common/upload.vue'
+
 export default{
-	name: 'PublishNews',
+	name: 'download',
 	data () {
 		return {
-			editorOption: {},
-			content: '',
-			title: '内容编写：',
-			newData: [{
-				name: 'title',
-				type: 'text',
-				placeholder: '请写入标题',
-				label: '标题:',
+			title: '下载中心',
+			iconState: {
+				class: 'el-icon-circle-plus',
+				state: true
 			},
-			{
-				name: 'title',
-				type: 'selete',
-				placeholder: '请写入标题',
-				label: '标题:',
-				options: [{
-					value: '亩',
-					label: '亩'
-				},
-				{
-					value: '平方米',
-					label: '平方米'
-				},
-				{
-					value: '公顷',
-					label: '公顷'
-				}]
+			srcLists: [{
+				txt: '图片1.png',
+				delete: 'el-icon-delete'
+			}],
+			iconArr: {
+				delete: true
 			},
-			{
-				name: 'title',
-				type: 'time',
-				placeholder: '请写入标题',
-				label: '标题:'
-			}]
+			isShowUpload: false
 		}
 	},
 	methods: {
@@ -82,17 +56,22 @@ export default{
 		},
 		onEditorReady (quill) {
 			console.log(quill)
+		},
+		openModel () {
+			this.isShowUpload = true
 		}
 	},
 	components: {
 		FormNew,
-		TitleCommon
+		TitleCommon,
+		Card,
+		Upload
 	}
 }
 </script>
 
 <style lang="sass">
-  .publish{
+  .download{
   	&-wrap{
   		background: #eee;
   	}

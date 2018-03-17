@@ -29,26 +29,17 @@
 					<template v-for="(subMenu, subIndex) in menu.children">
 						<el-menu-item v-if="!subMenu.children"
 							:index="subMenu.path">{{subMenu.name}}</el-menu-item>
-						<el-submenu
-							v-else
-							:index="subMenu.path">
-							<template slot="title">{{subMenu.name}}</template>
-							<el-menu-item 
-							v-for="(childMenu, childIndex) in subMenu.children"
-							:index="childMenu.path"
-							:key="childIndex"
-							>{{childMenu.name}}</el-menu-item>
 					  	<el-submenu
 					  		v-else
 					  		:key="subIndex"
 					  		:index="subMenu.path">
 					  		<template slot="title">{{subMenu.name}}</template>
-						  <el-menu-item 
-						  	v-for="(childMenu, childIndex) in subMenu.children"
-						  	:index="childMenu.path"
-						  	:key="childIndex"
-						  	@click="open(childMenu.path)"
-						  	>{{childMenu.name}}</el-menu-item>
+							<el-menu-item 
+								v-for="(childMenu, childIndex) in subMenu.children"
+								:index="childMenu.path"
+								:key="childIndex"
+								@click="open(childMenu.path)"
+								>{{childMenu.name}}</el-menu-item>
 						</el-submenu>
 					</template>
 				</el-submenu>
@@ -87,8 +78,6 @@ export default {
 			this.isCollapse = nv
 		}
 	},
-<<<<<<< HEAD
-=======
 	mounted () {
 	},
 	methods: {
@@ -96,15 +85,12 @@ export default {
 			console.log(path)
 		}
 	}
->>>>>>> Denton
 }
 </script>
  
 <style lang="sass" scoped>
 	.sidebar{
 		height: 100%;
-<<<<<<< HEAD
-=======
 		&-wrap{
 			position: absolute;
 			left: 0;
@@ -113,7 +99,6 @@ export default {
 			height: 1000px;
 			margin-right: 309px;
 		}
->>>>>>> Denton
 		&-logo{
 			width: 100%;
 			height: 89px;

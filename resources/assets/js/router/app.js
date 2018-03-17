@@ -4,7 +4,6 @@ Vue.use(Router)
 
 // 主体页面
 import index from '../app/index.vue'
-<<<<<<< HEAD
 
 // 消息管理 ---------------------------------
 // 发布消息
@@ -47,10 +46,10 @@ import floatPic from '../pages/floatPic.vue'
 // 登录页面
 import login from '../pages/login.vue'
 import basic from 'components/layouts/basic.vue'
-import publishNews from 'pages/publish-news.vue'
-import indexNews from 'pages/index-news.vue'
+import indexNews from 'pages/article/index-news.vue'
 import basicContent from 'components/layouts/basic-content.vue'
 import addColumn from '../pages/navManage/addColumn.vue'
+
 import editColumn from '../pages/navManage/editColumn.vue'
 
 const routes = [

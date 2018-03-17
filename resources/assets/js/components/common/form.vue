@@ -9,11 +9,10 @@
 
   <div class="form-wrap">
   	
-	<title-common :title="settitle"></title-common>
+	<title-common :title="title"></title-common>
 		
 		<el-form 
 			:model="form" 
-			:class="formCss"
 			label-width="80px">
 		<template v-for="(newItem, index) in newData">
 			<!-- 文本 -->
@@ -22,7 +21,6 @@
 				:label="newItem.label">
 				<el-input 
 					v-model="formInline[newItem.name]" 
-
 					:placeholder="newItem.placeholder"></el-input>
 			</el-form-item>
 			
@@ -61,6 +59,9 @@
 						@addOneColumn="addOneColumn"
 					></textAndBtn>
 			</el-form-item>
+
+			<!-- 下拉框 -->
+			<el-form-item v-else-if="newItem.type === 'selete'">
 				<template v-for="(lotsItem, lotsIndex) in newItem.components">
 					<el-select 
 						v-model="form.select" 
@@ -73,7 +74,6 @@
 						</el-option>
 					</el-select>
 				</template>
-				
 			</el-form-item>
 
 			<!-- 时间 -->
@@ -117,7 +117,6 @@ import TextAndBtn from 'components/common/textAndBtn.vue'
 export default{
 	name: 'basic',
 	props: {
-<<<<<<< HEAD
 		isNeedTitle: {
 			type: Boolean,
 			default: true
@@ -125,12 +124,7 @@ export default{
 		newData: {
 			type: Array,
 			default: []
-		},
-=======
-		newData: [],
-		formCss: {},
-		settitle: ''
->>>>>>> Denton
+		}
 	},
 	data () {
 		let form = {}
@@ -143,20 +137,17 @@ export default{
 		})
 		console.log(form)
 		return {
-<<<<<<< HEAD
 			// formInline: {
 			// 	user: '',
 			// 	region: ''
 			// },
 			formInline: form,
-			title: '发布设置'
-=======
+			title: '发布设置',
 			form: {
 				title: '',
 				select: '',
 				date: ''
 			}
->>>>>>> Denton
 		}
 	},
 	methods: {

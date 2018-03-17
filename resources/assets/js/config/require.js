@@ -12,11 +12,15 @@ Vue.use(iView)
 Vue.use(VueQuillEditor)
 
 require('sass/app.scss')
+
+import VueUploadComponent from 'vue-upload-component'
+Vue.component('file-upload', VueUploadComponent)
+
 // 注册element-ui全局组件
-import enLocale from 'element-ui/lib/locale/lang/en'
-import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
+import enLocale from 'element-ui/lib/locale/lang/en.js'
+import zhLocale from 'element-ui/lib/locale/lang/zh-CN.js'
 import locale from 'element-ui/lib/locale'
-import 'element-ui/lib/theme-default/index.css'
+import 'element-ui/lib/theme-chalk/index.css'
 // 设置语言
 switch (require('projectRoot/env.js').app_lang) {
 case 'zh-CN':

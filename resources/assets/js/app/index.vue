@@ -78,7 +78,10 @@ export default{
 	methods: {
 		collapse () {
 			this.isCollapse = !this.isCollapse
-		},
+		}
+	},
+	mounted () {
+		console.log(this.$route)
 	}
 }
 </script>
