@@ -1,24 +1,84 @@
 <template>
-  <div class="addColumn">
-    <h2>{{title}}</h2>
-  </div>
+	<div class="addColumn">
+		<el-card class="box-card">
+		   <ColumnForm 
+				:newData="formSetting.formData" 
+				:isNeedTitle="formSetting.isNeedTitle"
+				:showFooter="formSetting.showFooter"
+				v-on:submit="submit">
+			</ColumnForm>
+		</el-card>
+	</div>
 </template>
 
 <script>
+import ColumnForm from 'components/common/form'
 export default{
 	name: 'addColumn',
+	components: {
+		ColumnForm
+	},
 	data () {
 		return {
-			title: 'addColumn'
+			formSetting: {
+				isNeedTitle: true,
+				title: '添加栏目',
+				formData: [
+					{
+						name: 'column',
+						type: 'text',
+						label: '主栏目',
+						placeholder: '长度：1~20',
+						// options:
+					},
+					{
+						name: 'subColumn',
+						type: 'textAndBtn',
+						label: '子栏目',
+						placeholder: '长度：1~20'
+					},
+					{
+						name: 'submit',
+						type: 'submit',
+						btntype: 'submit',
+						value: '保存'
+					}
+				],
+				showFooter: false
+			}
 		}
 	},
+	methods: {
+		submit () {
+			// this.$set(this.dialogSetting, 'dialogFormVisible', false)
+		}
+	}
 }
 </script>
 
-<style>
+<style lang="sass" scoped>
 .addColumn{
-	border-bottom: 2px solid #f5f5f5;
-  	padding: 0 0 15px;
-  	margin-bottom: 20px;
+  	.text {
+		font-size: 14px;
+	}
+
+	.item {
+		margin-bottom: 18px;
+	}
+
+	.clearfix:before,
+	.clearfix:after {
+		display: table;
+		content: "";
+	}
+	.clearfix:after {
+		clear: both
+	}
+
+	.box-card {
+		width: 480px;
+		margin: 0 auto;
+	}
 }
+	
 </style>

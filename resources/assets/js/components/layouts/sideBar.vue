@@ -7,10 +7,12 @@
  */
 <template>
 	<el-menu
+		:router='true'
 		:collapse="isCollapse"
 		background-color="#2c2e2f"
 		text-color="#fff"
-		active-text-color="#ffd04b">
+		active-text-color="#ffd04b"
+		:unique-opened="isUniqueOpened">
 			<div class="sidebar-logo">
 				HOME
 			</div>
@@ -18,8 +20,7 @@
 				<el-submenu
 					v-if="menu.children"
 					:index="menu.name"
-					:key="index"
-					:router="$route.path">
+					:key="index">
 					<template slot="title">
 						<i :class="menu.icon"></i>
 						<span slot="title">
@@ -70,7 +71,8 @@ export default {
 	},
 	data () {
 		return {
-			isCollapse: false
+			isCollapse: false,
+			isUniqueOpened: true
 		}
 	},
 	watch: {

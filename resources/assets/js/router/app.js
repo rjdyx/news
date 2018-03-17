@@ -49,9 +49,9 @@ import login from '../pages/login.vue'
 import basic from 'components/layouts/basic.vue'
 import indexNews from 'pages/article/index-news.vue'
 import basicContent from 'components/layouts/basic-content.vue'
-import addColumn from '../pages/navManage/addColumn.vue'
+// import addColumn from '../pages/navManage/addColumn.vue'
 
-import editColumn from '../pages/navManage/editColumn.vue'
+// import editColumn from '../pages/navManage/editColumn.vue'
 
 const routes = [
 	{
@@ -77,21 +77,26 @@ const routes = [
 					{
 						path: '/eidt-index',
 						name: 'eidt-index',
-						component: eidtIndex,
+						component: editModel,
 					},
-					// 默认消息
+					// // 默认消息
 					{
 						path: '/defaultMsg',
 						name: 'defaultMsg',
-						component: defaultMsg,
+						component: editModel,
 					},
+					// {
+					// 	path: 'indexNews',
+					// 	component: indexNews
+					// },
+					// {
+					// 	path: 'addColumn',
+					// 	component: addColumn
+					// },
 					{
-						path: 'indexNews',
-						component: indexNews
-					},
-					{
-						path: 'addColumn',
-						component: addColumn
+						path: '/edit-model/:sequence',
+						name: 'edit-model',
+						component: editModel,
 					}
 				]
 			},
