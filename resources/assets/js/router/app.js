@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
-
+console.log('obj')
 // 主体页面
 import index from '../app/index.vue'
 
