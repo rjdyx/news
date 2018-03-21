@@ -64,7 +64,11 @@
                             @endforeach
                         </div>
                     </div>
-                    {!! $newsList->links() !!}
+                    <div class="footer-page">
+                        <div style="text-align: center;">
+                            {!! $newsList->links() !!}
+                        </div>
+                    </div>
                 </div>
             </div>
         @endif

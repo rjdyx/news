@@ -54,7 +54,7 @@
                 <div class="list-group" id="latestNews">
                     <div class="list-group-item active list-header">
                         最新消息
-                        <a class="more" href="/IndexAction/getNewsByParent?parent=-2" target="_blank">更多</a>
+                        <a class="more" href="/more-news/-2" target="_blank">更多</a>
                     </div>
                     @foreach ($newsList as $news)
                         @if ($news->pid == -2)
@@ -70,7 +70,7 @@
                 <div class="list-group" id="guidNews">
                     <div class="list-group-item active list-header">
                         常用管理系统
-                        <a class="more" href="/IndexAction/getNewsByParent?parent=-5" target="_blank">更多</a>
+                        <a class="more" href="/more-news/-5" target="_blank">更多</a>
                     </div>
                     @foreach ($newsList as $news)
                         @if ($news->pid == -5)
@@ -86,7 +86,7 @@
                 <div class="list-group" id="informNews">
                     <div class="list-group-item active list-header">
                         通知公告
-                        <a class="more" href="/IndexAction/getNewsByParent?parent=-3" target="_blank">更多</a>
+                        <a class="more" href="/more-news/-3" target="_blank">更多</a>
                     </div>
                     @foreach ($newsList as $news)
                         @if ($news->pid == -3)

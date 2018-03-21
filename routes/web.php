@@ -17,6 +17,10 @@ Route::get('/news/{id}', 'IndexController@news');
 
 Route::get('/news-page/{id}-{model}', 'IndexController@newsPage');
 
+Route::get('/download', 'IndexController@download');
+
+Route::get('/more-news/{id}', 'IndexController@moreNews');
+
 Route::get('/axios', function () {
     return view('axios');
 });

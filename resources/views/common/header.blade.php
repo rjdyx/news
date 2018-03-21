@@ -26,7 +26,7 @@
 	                    @endif
 	                </li>
 	            @endforeach
-	            <li><a href="/IndexAction/getEnclosure" target="_blank">下载中心</a></li>
+	            <li><a href="/download" target="_blank">下载中心</a></li>
 	        </ul>
 	    </div>
 	</nav>

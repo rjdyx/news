@@ -6,6 +6,7 @@ use DB;
 use App\LabNav;
 use App\LabNews;
 use App\LabLink;
+use App\LabEnclosure;
 use App\LabCarouselPic;
 use App\LabBottomMessage;
 use Illuminate\Http\Request;
@@ -108,6 +109,12 @@ class IndexController extends Controller
         return view('news', $result);
     }
 
+    /**
+     * 获取导航栏页数据
+     * @param  [type] $id    [description]
+     * @param  [type] $model [description]
+     * @return [type]        [description]
+     */
     public function newsPage($id, $model)
     {
         $news = null;
@@ -157,5 +164,29 @@ class IndexController extends Controller
             'newsList' => $newsList,
         ], $message);
         return view('news-page', $result);
+    }
+
+    /**
+     * 获取下载数据
+     * @return [type] [description]
+     */
+    public function download()
+    {
+        $enclosure = LabEnclosure::paginate(config('app.page_size'));
+        $result = array_merge(['enclosure' => $enclosure], $this->publicMessage());
+        return view('download', $result);
+    }
+
+    public function moreNews($id)
+    {
+        $newsList = LabNews::where('pid', $id)->paginate(config('app.page_size'));
+        if ($id == -5) {
+            foreach ($newsList as $news) {
+                $content = substr($news->content, stripos($news->content, 'http'));
+                $news->content = substr($content, 0, stripos($content, '>') - 1);
+            }
+        }
+        $result = array_merge(['newsList' => $newsList, 'pid' => $id], $this->publicMessage());
+        return view('more-news', $result);
     }
 }
