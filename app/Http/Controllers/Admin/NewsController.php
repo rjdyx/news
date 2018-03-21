@@ -7,6 +7,7 @@ use App\LabNews;
 use Illuminate\Http\Request;
 use Facades\App\Facades\IUtils;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\CarouselPicController;
 
 class NewsController extends Controller
 {
@@ -100,14 +101,20 @@ class NewsController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'priority' => 'required|numeric',
-            'pid' => 'required|numeric'
+            'pid' => 'required|numeric',
+            'time' => 'required|date',
+            'pic' => 'string'
         ]);
 
         $attributes = ['title', 'content', 'priority', 'pid'];
         $news = $id? LabNews::find($id): new LabNews();
         IUtils::valueFn($request, $news, $attributes);
+        $news->created_at = $request->input('time');
         $news->save();
 
-        return response()->json($news->id);
+        $request->offsetSet('news_id', $news->id);
+        $id = (new CarouselPicController())->store($request);
+
+        return response()->json(true);
     }
 }

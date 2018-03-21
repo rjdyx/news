@@ -189,6 +189,8 @@ return [
 
         Zizaco\Entrust\EntrustServiceProvider::class,
 
+        Stevenyangecho\UEditor\UEditorServiceProvider::class,
+
     ],
 
     /*

@@ -106,7 +106,7 @@ class IndexController extends Controller
     {
         $news = LabNews::find($id);
         $result = array_merge(['news' => $news], $this->publicMessage());
-        return view('news', $result);
+        return view('home.news', $result);
     }
 
     /**
@@ -163,7 +163,7 @@ class IndexController extends Controller
             'news' => $news,
             'newsList' => $newsList,
         ], $message);
-        return view('news-page', $result);
+        return view('home.news-page', $result);
     }
 
     /**
@@ -174,7 +174,7 @@ class IndexController extends Controller
     {
         $enclosure = LabEnclosure::paginate(config('app.page_size'));
         $result = array_merge(['enclosure' => $enclosure], $this->publicMessage());
-        return view('download', $result);
+        return view('home.download', $result);
     }
 
     public function moreNews($id)
@@ -187,6 +187,6 @@ class IndexController extends Controller
             }
         }
         $result = array_merge(['newsList' => $newsList, 'pid' => $id], $this->publicMessage());
-        return view('more-news', $result);
+        return view('home.more-news', $result);
     }
 }

@@ -42,11 +42,11 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $name = $request->input('name');
+        $name = $request->input('username');
         $password = $request->input('password');
         if (Auth::attempt(['name' => $name, 'password' => $password])) {
             if (Auth::user()->active == 1) {
-                return response()->json([
+                return view('admin.add-article',[
                     'user' => [
                         'id' => Auth::user()->id,
                         'name' => Auth::user()->name,

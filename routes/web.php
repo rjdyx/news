@@ -26,7 +26,7 @@ Route::get('/axios', function () {
 });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'/*, 'middleware' => ['auth', 'active']*/], function () {
-    
+
     // 导航栏管理
     Route::get('nav/indexNav', 'NavController@indexNav');
     Route::get('nav/indexSubNav/{id}', 'NavController@indexSubNav');
@@ -46,6 +46,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'/*, 'middleware' => ['a
     Route::resource('float-pic', 'FloatPicController');
 
     // 新闻管理
+    Route::get('news/add-article', function ()
+    {
+        return view('admin.add-article');
+    });
     Route::get('news/getNewsList', 'NewsController@getNewsList');
     Route::get('news/getNewsById/{id}', 'NewsController@getNewsById');
     Route::resource('news', 'NewsController');

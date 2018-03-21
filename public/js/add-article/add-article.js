@@ -24,18 +24,19 @@ $(function() {
 function getMainNavs() {
     $.ajax({
         type: "GET",
-        url: $.GetUrl() + "NavAction/getMainNavs",
+        url: "/admin/nav/indexNav",
         dataType: "json",
         contentType: "application/json",
         success: function(ret) {
+            console.log(ret)
             var tmp = "";
             tmp += '<select class="form-control" onchange="getSubNavs()">';
             tmp += '<option value="-2">最新消息</option>';
             tmp += '<option value="-3">通知公告</option>';
             tmp += '<option value="-4">图片新闻</option>';
             tmp += '<option value="-5">办事指南</option>';
-            for (var i = 2; i < ret.length; i++) {
-                tmp += '<option value="' + ret[i].priority + '">' + ret[i].name + '</option>';
+            for (var i = 0; i < ret.length; i++) {
+                tmp += '<option value="' + ret[i].id + '">' + ret[i].name + '</option>';
             }
             tmp += '</select>';
             $("#main-nav").append(tmp);
@@ -61,16 +62,13 @@ function getSubNavs() {
     }
     $.ajax({
         type: "GET",
-        url: $.GetUrl() + "NavAction/getSubNavs",
-        data: {
-            parent: parent
-        },
+        url: "/admin/nav/indexSubNav/" + parent,
         dataType: "json",
         success: function(ret) {
             var tmp = "";
             tmp += '<select class="form-control">';
             for (var i = 0; i < ret.length; i++) {
-                tmp += '<option value="' + ret[i].priority + '">' + ret[i].name + '</option>';
+                tmp += '<option value="' + ret[i].id + '">' + ret[i].name + '</option>';
             }
             if (ret.length == 0) {
                 tmp += '<option value="0" selected="selected">无子栏目</option>';
@@ -98,23 +96,29 @@ function submitNews() {
 
 //新增新闻到lab_news表中，此新闻为滚动图片新闻
 function addNews() {
-    //	alert($("#main-nav select option:selected").val()+" "+$("#sub-nav select option:selected").val());
-    //	alert($('input:checkbox[name=flag]:checked').parent().siblings()[0].outerHTML);
-    //	return false;
+    	// alert($("#main-nav select option:selected").val()+" "+$("#sub-nav select option:selected").val());
+    	// alert($('input:checkbox[name=flag]:checked').parent().siblings()[0].outerHTML);
+    	var src = $($('input:checkbox[name=flag]:checked').parent().siblings()[0].outerHTML)[0].attributes[0].value;
+        if (src.toLowerCase().indexOf('http') == -1) {
+            src = src.substring(src.indexOf('images') + 7);
+        }
     $.ajax({
         type: "POST",
-        url: $.GetUrl() + "NewsAction/addNews",
+        url: "/admin/news",
         data: {
             title: $("#article_name").val(),
             content: UE.getEditor('editor').getContent(),
-            pic: $('input:checkbox[name=flag]:checked').parent().siblings()[0].outerHTML,
-            parent: $("#main-nav select option:selected").val(),
+            pic: src,
+            pid: $("#main-nav select option:selected").val(),
             priority: $("#sub-nav select option:selected").val(),
             time:$("#article_date").val()
         },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         dataType: "json",
         success: function(ret) {
-            if (ret == "1") {
+            if (ret == true) {
                 toastr.success("发布成功");
                 setTimeout(function() {
                     window.location.reload();
@@ -134,17 +138,20 @@ function addNewsWithoutPic() {
     //	return false;
     $.ajax({
         type: "POST",
-        url: $.GetUrl() + "NewsAction/addNews",
+        url: "/admin/news",
         data: {
             title: $("#article_name").val(),
             content: UE.getEditor('editor').getContent(),
-            parent: $("#main-nav select option:selected").val(),
+            pid: $("#main-nav select option:selected").val(),
             priority: $("#sub-nav select option:selected").val(),
             time:$("#article_date").val()
         },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         dataType: "json",
         success: function(ret) {
-            if (ret == "1") {
+            if (ret == true) {
                 toastr.success("发布成功");
                 setTimeout(function() {
                     window.location.reload();

@@ -23,7 +23,7 @@
                             @else
                                 <div class="item">
                             @endif
-                                <a href="{{ url('/news?id='.$carouselPicList[$i]->newsId) }}" target="_blank">
+                                <a href="{{ url('/news/'.$carouselPicList[$i]->news_id) }}" target="_blank">
                                     @if (stripos($carouselPicList[$i]->pic,'http') !== false)
                                         <img style="border-left-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-top-width: 0px" alt="" src="{{ $carouselPicList[$i]->pic }}"/>
                                     @else
@@ -31,7 +31,7 @@
                                     @endif
                                 </a>
                                     <div class="carousel-caption">
-                                        <a href="{{ url('/news?id='.$carouselPicList[$i]->newsId) }}" target="_blank">{{ $carouselPicList[$i]->title }}</a>
+                                        <a href="{{ url('/news/'.$carouselPicList[$i]->news_id) }}" target="_blank">{{ $carouselPicList[$i]->title }}</a>
                                     </div>
                             </div>
                         @endfor

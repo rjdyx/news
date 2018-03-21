@@ -20,11 +20,11 @@
 </head>
 <body>
     
-    @include('common.header')
+    @include('layouts.home.header')
 
     @yield('content')
 
-    @include('common.footer')
+    @include('layouts.home.footer')
 
     @section('javascript')
         <!-- <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script> -->
