@@ -1,99 +1,71 @@
-<header>
-	<div class="header_wrap">
-		<div class="header_logo"></div>
-		<div class="header_right"></div>
-		<div class="header_txt">
-			<span>修德</span>
-			<span>博学</span>
-			<span>求实</span>
-			<span>创新</span>
-		</div>
-	</div>
-</header>
-<nav class="navbar navbar-default">
-	<div class="container">
-		<ul class="nav navbar-nav" id="nav">
-		<?php 
-			$navs = ['首页', '首页','首页','首页','首页','首页']
-			?>
-		@foreach ($navs as $nav)
-		<li class="dropdown">
-			<a href="{{url('test')}}" target="_blank">{{$nav}}</a>
-		</li>
-		@endforeach
-	</ul>
-	</div>
-</nav>
-<style>
-	.navbar-default{
-		text-align: center;
-		background: #fff;
-		border-top: 1px solid #ebebeb;
-	}
-	nav{
-		border: 0px !important;
-		box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-		font-weight: 700;
-	}
-	#nav{
-		width: 1000px;
-		margin: 0 auto;
-	}
-	.navbar-default ul.navbar-nav{
-		float: none;
-	}
-	.navbar-default li a:hover, .navbar-default li a:focus{
-		color: #054e75;
-	}
-	.navbar-default li{
-		width: calc(14.2857%);
-	}
-	.dropdown:hover{
-		background: #e7e7e7;
-	}
-	header{
-		background: #0e3856;
-	}
-	.header_wrap{
-		width: 1000px;
-		height: 175px;
-		position: relative;
-		margin: 0 auto;
-	}
-	.header_logo{
-		width: 633px;
-		height: 111px;
-		top: 20px;
-		left: -45px;
-		position: absolute;
-		background: url(image/logo_01.png);
-	}
-	.header_right{
-		position: absolute;
-		background: url(image/banner.jpg);
-		width: 428px;
-		height: 155px;
-		bottom: 0px;
-		right: -30px;
-	}
-	.header_txt{
-		color: #fff;
-		font-size: 20px;
-		width: 200px;
-		height: 60px;
-		position: absolute;
-		left: -45px;
-		bottom: 15px;
-	}
-	.header_txt span{
-		width: 20px;
-		display: inline-block;
-		margin-left: 15px;
-		font-weight: bold;
-		font-family: "STXingkai","STKaiti";
-		bottom: 20px;
-	}
-</style>
-<style>
-	
-</style>
+@section('header')
+	<header>
+	    <div class="header-wrapper">
+	        <div class="header-banner"></div>
+	        <div class="header-pic"></div>
+	    </div>
+	</header>
+
+	<nav class="navbar navbar-default">
+	    <div class="container">
+	        <ul id="nav" class="nav navbar-nav">
+	            <li><a href="/">首页</a></li>
+	            @foreach ($navs as $nav)
+	                <li class="dropdown">
+	                    @if (sizeof($nav[1]) > 0)
+	                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ $nav[0]->name }}<span class="caret"></span></a>
+	                        <ul class="dropdown-menu" role="menu">
+	                    @else
+	                        <a href="{{ url('/news-page/'.$nav[0]->id.'-'.$nav[0]->model) }}"role="button" aria-expanded="false" target="_blank">{{ $nav[0]->name }}</span></a>
+	                    @endif
+	                    @foreach ($nav[1] as $subNav)
+	                        <li><a href="{{ url('/news-page/'.$subNav->id.'-'.$subNav->model) }}" target="_blank">{{ $subNav->name }}</a></li>
+	                    @endforeach
+	                    @if (sizeof($nav[1]) > 0)
+	                       </ul>
+	                    @endif
+	                </li>
+	            @endforeach
+	            <li><a href="/IndexAction/getEnclosure" target="_blank">下载中心</a></li>
+	        </ul>
+	    </div>
+	</nav>
+@show
+
+@section('javascript')
+    @parent
+    <script>
+        $('#nav > li').width('calc(100%/' + 8 +')');
+        $(document).ready(function() {
+		    shrinkNav();
+		});
+
+		//导航栏的变化
+		function shrinkNav() {
+		    var navLength = $('#nav > li').length; //栏目长度
+		    if (navLength > 7) {
+		        var subNav = $('#nav > li').slice(6);
+		        $('#nav > li').slice(6).remove();
+		        var li = document.createElement('li');
+		        var liMore = $(li).addClass('dropdown');
+		        var aMore = $('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">更多<span class="caret"></span></a>');
+		        var ulMore = $('<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu"></ul>');
+		        for (var index = 0; index < subNav.length; index++) {
+		            var navLi = $('<li class="dropdown-submenu">' + '<a href="' + subNav.eq(index).children('a').attr("href") + '">' + subNav.eq(index).children('a').text() + '</a><li>');
+		            var subUl = $('<ul class="dropdown-menu"><ul>');
+		            var subLi = subNav.eq(index).children('.dropdown-menu').children('li');
+		            if (subLi.length == 0) {
+		                navLi.removeClass('dropdown-submenu');
+		                ulMore.append(navLi);
+		            } else {
+		                subUl.append(subLi);
+		                navLi.append(subUl);
+		                ulMore.append(navLi);
+		            }
+		        }
+		        liMore.append(aMore, ulMore);
+		        $('#nav').append(liMore);
+		    }
+		}
+	</script>
+@endsection

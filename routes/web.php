@@ -11,25 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'IndexController@index');
+
+Route::get('/news/{id}', 'IndexController@news');
+
+Route::get('/news-page/{id}-{model}', 'IndexController@newsPage');
 
 Route::get('/axios', function () {
     return view('axios');
 });
-
-
-Route::get('/app', function () {
-    return view('app');
-});
-
-
-Route::get('/index', 'HomeController@indexMsg');
-
-Route::get('system/query', 'Admin\SystemController@query');
-
-Route::get('ws/checkConnect', 'Admin\SocketController@checkConnect');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'/*, 'middleware' => ['auth', 'active']*/], function () {
     
